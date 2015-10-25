@@ -5,4 +5,3 @@ def read_cancerRates():
 	cancerRates_trim = cancerRates[['County Name', 'Percent/Rate']]
 	return cancerRates_trim
 
-#print read_cancerRates()
