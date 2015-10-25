@@ -8,7 +8,7 @@ Smoking is a risk factor for cancers of the lung, mouth, larynx, bladder, kidney
 The below information was taken from the American Cancer Society and other literature.
 
 | Cancer Type  | Smoking | Industrial Chemicals | Industries |
-|---|---|
+|---|---|---|---|
 | Bladder  | Highest | o-Toluidine, analine, benzidine, beta-naphthylamine | rubber, leather, textiles, paint products, printing |
 | Bone  |   |
 | Brain  |   | vinyl chloride | plastics |
