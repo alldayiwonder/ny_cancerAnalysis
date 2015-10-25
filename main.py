@@ -1,5 +1,8 @@
 from read_cancerRates import read_cancerRates
 from read_airEmissions import read_airEmissions
+from readSmoking import readSmoking
+from readAllCancer import readAllCancer
+from readIndivCancer import readIndivCancer
 import pandas as pd 
 
 # Import cancer data
@@ -9,6 +12,15 @@ cancerRates['County Name'] = map(lambda x: x.upper(), cancerRates['County Name']
 
 # Import air data
 airEmissions = read_airEmissions()
+
+# Import smoking data
+smoking = readSmoking()
+
+# Import all-cancer data
+allCancer = readAllCancer()
+
+# Import individual cancer data
+indivCancer = readIndivCancer()
 
 # Join air emission data with cancer rates data
 data_merged = pd.merge(cancerRates, airEmissions, left_on = 'County Name', right_on = 'county')
