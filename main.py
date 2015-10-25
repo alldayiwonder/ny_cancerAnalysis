@@ -25,9 +25,7 @@ indivCancer = readIndivCancer()
 # Join air emission data with cancer rates data
 data_merged = pd.merge(cancerRates, airEmissions, left_on = 'County Name', right_on = 'county')
 data_merged = data_merged.drop('county', 1)
-print data_merged 
+#print data_merged 
 print 
 print '============================ Correlation Table ============================'
 print data_merged.corr()
-
-print 'test'
