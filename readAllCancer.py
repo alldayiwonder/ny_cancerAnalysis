@@ -4,8 +4,9 @@ from readFips import readFips
 
 fips = readFips()
 
-def readAllCancer():
-	# https://health.data.ny.gov/Health/Community-Health-All-Cancer-Incidence-Age-adjusted/4wxt-6bzs
+def readAllCancer_County():
+	# Total cancer rate, age adjusted
+	# Data from https://health.data.ny.gov/Health/Community-Health-All-Cancer-Incidence-Age-adjusted/4wxt-6bzs
 	allCancer = pd.read_csv('data/Community_Health__All_Cancer_Incidence_Age-adjusted_Rate_per_100_000_by_County_Maps__Latest_Data.csv')
 	allCancer['County Name'] = allCancer['County Name'].str.upper().str.strip()
 	allCanMrg = pd.merge(allCancer, fips, left_on = 'County Name', right_on = 'countyName')
@@ -13,8 +14,9 @@ def readAllCancer():
 	allCanMrg = allCanMrg[['County Name', 'Percent/Rate', 'cCode', 'Average Number of Denominator']]
 	return allCanMrg
 
-def readIndivCancer():
-	# individual cancer data:
+def readIndivCancer_County():
+	# Individual cancer data
+	# Counts of newly diagnosed cancer among New York State residents
 	cancerDir = "data/NYSDOH_CancerMapping_Data_2005_2009/"
 	cancerFile = "NYSDOH_CancerMapping_Data_2005_2009.csv"
 	indivCancer = pd.read_csv(cancerDir+cancerFile)
@@ -33,10 +35,10 @@ def readIndivCancer():
 
 	return indivCanMrg
 
-def mergeCancer():
+def mergeCancer_County():
 
-	allCanMrg = readAllCancer()
-	indivCanMrg = readIndivCancer()
+	allCanMrg = readAllCancer_County()
+	indivCanMrg = readIndivCancer_County()
 	indivCanMrgPop = pd.merge(indivCanMrg, allCanMrg[['cCode', 'Average Number of Denominator']], left_on = 'countyCode', right_on = 'cCode')
 	return indivCanMrgPop
 
