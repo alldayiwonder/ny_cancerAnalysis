@@ -23,4 +23,3 @@ def read_airEmissions():
 	data_merged = data_merged.drop('chemical', 1)
 	return data_merged
 
-print read_airEmissions()
