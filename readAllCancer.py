@@ -42,4 +42,13 @@ def mergeCancer_County():
 	indivCanMrgPop = pd.merge(indivCanMrg, allCanMrg[['cCode', 'Average Number of Denominator']], left_on = 'countyCode', right_on = 'cCode')
 	return indivCanMrgPop
 
+def readIndivCancer_CensusBlock():
+	# GEOID10 field, 12 digits: STATE (2) + COUNTY (3) + TRACT (6) + BLOCK GROUP (1)
+	# Example GEOID10: 482012231001 <- Block Group 1 in Census Tract 2231 in Harris County, TX
+	cancerDir = "data/NYSDOH_CancerMapping_Data_2005_2009/"
+	cancerFile = "NYSDOH_CancerMapping_Data_2005_2009.csv"
+	indivCancer = pd.read_csv(cancerDir+cancerFile)	
+	return indivCancer
+
+#print readIndivCancer_CensusBlock()
  
