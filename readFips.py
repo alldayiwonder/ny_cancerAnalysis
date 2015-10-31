@@ -2,6 +2,8 @@ import pandas as pd
 import numpy as np
 import requests
 
+pd.set_option('display.width', 200)
+
 # See https://www.census.gov/geo/reference/codes/cou.html
 
 def readFips():
@@ -43,4 +45,4 @@ def addGEOID_TRI():
 			pass
 	return airEmissions
 
-addGEOID_TRI()
+#addGEOID_TRI()

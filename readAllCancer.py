@@ -2,6 +2,8 @@ import pandas as pd
 import numpy as np
 from readFips import readFips
 
+#pd.set_option('display.width', 100)
+
 fips = readFips()
 
 def readAllCancer_County():
