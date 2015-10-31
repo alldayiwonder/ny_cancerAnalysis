@@ -35,12 +35,13 @@ def main_CensusBlock():
 
 	# Join air emission data with cancer rates data
 	data_merged = pd.merge(allCancer, airEmissions, left_on = 'geoid10', right_on = 'geoid')
-	data_merged = data_merged.drop('county', 1)
+	data_merged = data_merged.drop('geoid', 1)
 	#print data_merged
 
 	print 
 	print '============================ County Level Correlation Table ============================'
 	print data_merged.corr()
+
 
 main_CensusBlock()
 
