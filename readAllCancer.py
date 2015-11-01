@@ -64,9 +64,9 @@ def mergeCancer_County():
 	for i in canCols:
 		indivCanMrgPop[i+'-Per100k'] = indivCanMrgPop[i]*100000/indivCanMrgPop['totPop']
 	indivCanMrgPop.drop(canCols, inplace=True,axis=1)
-	indivCanMrgPop['fullCode'] = '36'+indivCanMrgPop['countyFIPS']
-	newCols = [x for x in list(indivCanMrgPop.columns.values) if x not in ['countyCode', 'countyFIPS', 'totPop', 'countyName', 'fullCode']]
-	for x in ['totPop', 'countyName', 'countyFIPS', 'fullCode']:
+	indivCanMrgPop['geoid5'] = '36'+indivCanMrgPop['countyFIPS']
+	newCols = [x for x in list(indivCanMrgPop.columns.values) if x not in ['countyCode', 'countyFIPS', 'totPop', 'countyName', 'geoid5']]
+	for x in ['totPop', 'countyName', 'countyFIPS', 'geoid5']:
 		newCols.insert(0, x)
 	indivCanMrgPop = indivCanMrgPop[newCols]
 	return indivCanMrgPop
@@ -83,9 +83,9 @@ def mergeCancer_Tract():
 	for i in canCols:
 		indivCanMrgPop[i+'-Per100k'] = indivCanMrgPop[i]*100000/indivCanMrgPop['totPop']
 	indivCanMrgPop.drop(canCols, inplace=True,axis=1)
-	indivCanMrgPop['fullCode'] = '36'+indivCanMrgPop['countyFIPS']+indivCanMrgPop['tractFIPS']
-	newCols = [x for x in list(indivCanMrgPop.columns.values) if x not in ['tractCode', 'tractFIPS', 'countyFIPS', 'totPop', 'countyName', 'fullCode']]
-	for x in ['totPop','tractFIPS', 'fullCode']:
+	indivCanMrgPop['geoid11'] = '36'+indivCanMrgPop['tractFIPS']
+	newCols = [x for x in list(indivCanMrgPop.columns.values) if x not in ['tractCode', 'tractFIPS', 'countyFIPS', 'totPop', 'countyName', 'geoid11']]
+	for x in ['totPop','tractFIPS', 'geoid11']:
 		newCols.insert(0, x)
 	indivCanMrgPop = indivCanMrgPop[newCols]
 	# print indivCanMrgPop
@@ -103,5 +103,5 @@ def readIndivCancer_CensusTract():
 	#print indivCancer
 	return indivCancer
 
-print mergeCancer_Tract()
+# print mergeCancer_Tract()[:5]
 # print mergeCancer_County()[:5]
