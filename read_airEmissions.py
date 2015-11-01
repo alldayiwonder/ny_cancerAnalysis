@@ -29,32 +29,44 @@ def read_airEmissions_County():
 	data_merged = data_merged.drop('chemical', 1)
 	return data_merged
 
-def read_airEmissions_CensusBlock():
+def read_airEmissions_CensusTract():
 	"""
-	Creates a dataframe where air emissions from each facility are aggregated to the Census Block level
+	Creates a dataframe where air emissions from each facility are aggregated to the Census Tract level. Air emissions data from EPA's toxic release inventory (TRI). The TRI is part of the Emergency Planning and Community Right-to-Know Act of 1986 (EPCRA). EPCRA requires companies with 10 or more employees, in certain industries, to collect and publicly disclose information about how they manufacture, process or use any of nearly 650 chemicals on a special list developed by the U.S. EPA. Companies that produce more than 25,000 pounds or handle more than 10,000 pounds of a listed toxic chemical must report.
 	"""
 
 	# Import the output from readFIPS function addGEOID_TRI. TRI file contains 2095 records.
 	airEmissions = pd.read_csv('data/EPA_TRI/toxic-release-inventory.ny.2013.geoid.csv', index_col=0, dtype={'geoid': str})
 
-	# Trim dataframe and groupby census tract block and aggregate fugitive and stack air emissions 
+	# Trim dataframe and groupby census tract and aggregate fugitive and stack air emissions 
 	airEmissions_trim = airEmissions[['geoid','tri_facility_id','facility_name','county', 'n_5_1_fugitive_air','n_5_2_stack_air', 'chemical']]
-	airEmissions_trim['geoid'] = airEmissions_trim['geoid'].str.slice(0,12)
+	airEmissions_trim['geoid'] = airEmissions_trim['geoid'].str.slice(0,11)  # Make sure geoid does not include block
 	
-	# Total emissions per census tract block
+	# Total emissions per census tract, total of 498 tracts in TRI data set
 	airEmissions_total = airEmissions_trim.groupby(['geoid'], as_index=False).aggregate(np.sum)
+	
+	# Emissions for each chemical per census tract
+	airEmissions_allchemicals = airEmissions_trim.groupby(['geoid', 'chemical'], as_index=False).aggregate(np.sum)
+	
+	# Optional code
+	# Finds only those records where stack and fugitive emissions are greater than arbitray value
+	airEmissions_allchemicals = airEmissions_allchemicals[(airEmissions_allchemicals.n_5_2_stack_air > 100) | (airEmissions_allchemicals.n_5_1_fugitive_air > 100)]  
+	
+	# List unique chemicals 
+	allchemicals = airEmissions_allchemicals['chemical'].unique().tolist()  # List of unique chemicals
+	#print 'Number of unique chemicals:', len(allchemicals)
 
-	# Benzene emissions per census tract block
-	airEmissions_benzene = airEmissions_trim.groupby(['geoid', 'chemical'], as_index=False).aggregate(np.sum)
-	airEmissions_benzene = airEmissions_benzene[airEmissions_benzene['chemical'] == 'BENZENE']
+	# Get aggregate emissions per chemicals
+	airEmissions_benzene = airEmissions_allchemicals[airEmissions_allchemicals['chemical'] == 'BENZENE']
 	airEmissions_benzene = airEmissions_benzene.rename(columns={'n_5_1_fugitive_air': 'n_5_1_fugitive_air_benzene', 'n_5_2_stack_air': 'n_5_2_stack_air_benzene'})
+	#print airEmissions_toluidine
 
 	# Merge the aggregation of each specific chemical with the total emissions per county for the main file
 	data_merged = pd.merge(airEmissions_total, airEmissions_benzene)
 	data_merged = data_merged.drop('chemical', 1)
+	#print data_merged
 	return data_merged
 
-#print read_airEmissions_CensusBlock()
+#read_airEmissions_CensusTract()
 
 
 
