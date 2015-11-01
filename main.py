@@ -1,7 +1,7 @@
 from read_airEmissions import read_airEmissions_County
-from read_airEmissions import read_airEmissions_CensusBlock
+from read_airEmissions import read_airEmissions_CensusTract
 from readAllCancer import mergeCancer_County
-from readAllCancer import readIndivCancer_CensusBlock
+from readAllCancer import readIndivCancer_CensusTract
 from readSmoking import readSmoking
 import pandas as pd 
 
@@ -26,16 +26,16 @@ def main_County():
 	print '============================ County Level Correlation Table ============================'
 	print data_merged.corr()
 
-def main_CensusBlock():
+def main_CensusTract():
 	# Import air data
-	airEmissions = read_airEmissions_CensusBlock()
+	airEmissions = read_airEmissions_CensusTract()
 
 	# Import cancer data
-	allCancer = readIndivCancer_CensusBlock()  # NEED TO NORMALIZE COUNTS WITH POPULATION VALUE
+	allCancer = readIndivCancer_CensusTract()  # NEED TO NORMALIZE COUNTS WITH POPULATION VALUE
 
 	# Join air emission data with cancer rates data
 	data_merged = pd.merge(allCancer, airEmissions, left_on = 'geoid10', right_on = 'geoid')
-	data_merged = data_merged.drop('geoid', 1)
+	data_merged = data_merged.drop('geoid', 1)	
 	#print data_merged
 
 	print 
@@ -43,5 +43,5 @@ def main_CensusBlock():
 	print data_merged.corr()
 
 
-main_CensusBlock()
+main_CensusTract()
 

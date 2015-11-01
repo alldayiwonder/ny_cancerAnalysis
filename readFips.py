@@ -20,7 +20,7 @@ def addGEOID_TRI():
 	# TRI file contains 2095 records. Process takes roughly 14 minutes for this file.
 	airEmissions = pd.read_csv('data/EPA_TRI/enigma-us.gov.epa.toxic-release-inventory.ny.2013-63f546aac1daadc29b6fad5f6812568f.csv')
 
-	# Get the Census Block code for each facility from lat long
+	# Get the Census Tract code for each facility from lat long
 	# FCC API to get census block data from lat long
 	# 'http://data.fcc.gov/api/block/find?format=json&latitude=[latitude]&longitude=[longitude]&showall=[true/false]'	
 	airEmissions["geoid"] = np.nan
