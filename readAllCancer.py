@@ -1,10 +1,12 @@
 import pandas as pd
 import numpy as np
 from readFips import readFips
+from readAcs import popData
 
 #pd.set_option('display.width', 100)
 
 fips = readFips()
+
 
 def readAllCancer_County():
 	# Total cancer rate, age adjusted
@@ -31,17 +33,23 @@ def readIndivCancer_County():
 	for i in ls:
 	    aggIndivCan[i] = byCounty[i].aggregate(np.sum)
 	aggIndivCan = aggIndivCan.reset_index()
-	aggIndivCan
 	indivCanMrg = pd.merge(aggIndivCan, fips, left_on = 'countyCode', right_on = 'cCode')
 	indivCanMrg = indivCanMrg.drop(['state', 'sCode', 'cCode', 'county', 'h'], 1)
-
 	return indivCanMrg
 
 def mergeCancer_County():
 
-	allCanMrg = readAllCancer_County()
+	# allCanMrg = readAllCancer_County()
+	acsCounty = popData('county')
 	indivCanMrg = readIndivCancer_County()
-	indivCanMrgPop = pd.merge(indivCanMrg, allCanMrg[['cCode', 'Average Number of Denominator']], left_on = 'countyCode', right_on = 'cCode')
+	indivCanMrgPop = pd.merge(indivCanMrg, acsCounty[['countyFIPS', 'totPop']], left_on = 'countyCode', right_on = 'countyFIPS')
+	canCols = indivCanMrgPop.columns.values[1:-3]
+	for i in canCols:
+		indivCanMrgPop[i+'-Per100k'] = indivCanMrgPop[i]*100000/indivCanMrgPop['totPop']
+	newCols = [x for x in list(indivCanMrgPop.columns.values) if x not in ['countyCode', 'countyFIPS', 'totPop']]
+	for x in ['totPop', 'countyFIPS']:
+		newCols.insert(0, x)
+	indivCanMrgPop = indivCanMrgPop[newCols]
 	return indivCanMrgPop
 
 def readIndivCancer_CensusBlock():
@@ -52,5 +60,5 @@ def readIndivCancer_CensusBlock():
 	indivCancer = pd.read_csv(cancerDir+cancerFile)	
 	return indivCancer
 
-#print readIndivCancer_CensusBlock()
- 
+# print mergeCancer_County()[:5]
+# mergeCancer_County()

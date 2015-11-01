@@ -12,6 +12,8 @@ def readFips():
 	fips['countyName'] = fips['county'].str.split('County').apply(lambda x: x[0]).str.upper().str.strip()
 	return fips
 
+# print readFips()
+
 def addGEOID_TRI():
 	"""
 	This function adds a 15 digit geoid code to each record in the TRI csv and outputs a new csv for read_airEmissions file

@@ -20,3 +20,5 @@ def popData(geoLevel):
 	if geoLevel == 'tract':
 		data['tractFIPS'] = data['Geo_FIPS'].str[5:]
 	return data
+
+# print popData('tract')
