@@ -18,7 +18,7 @@ def popData(geoLevel):
 	data.columns = newCol
 	data['countyFIPS'] = data['Geo_FIPS'].str[2:5]
 	if geoLevel == 'tract':
-		data['tractFIPS'] = data['Geo_FIPS'].str[5:]
+		data['tractFIPS'] = data['Geo_FIPS'].str[2:]
 	return data
 
 # print popData('tract')
