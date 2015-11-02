@@ -49,7 +49,7 @@ def read_airEmissions_CensusTract():
 	
 	# Optional code
 	# Finds only those records where stack and fugitive emissions are greater than arbitray value
-	airEmissions_allchemicals = airEmissions_allchemicals[(airEmissions_allchemicals.n_5_2_stack_air > 100) | (airEmissions_allchemicals.n_5_1_fugitive_air > 100)]  
+	airEmissions_allchemicals = airEmissions_allchemicals[(airEmissions_allchemicals.n_5_2_stack_air > 0) | (airEmissions_allchemicals.n_5_1_fugitive_air > 0)]  
 	
 	# List unique chemicals 
 	allchemicals = airEmissions_allchemicals['chemical'].unique().tolist()  # List of unique chemicals
