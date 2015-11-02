@@ -18,12 +18,13 @@ def readAllCancer_County():
 	allCanMrg = allCanMrg[['County Name', 'Percent/Rate', 'cCode', 'Average Number of Denominator']]
 	return allCanMrg
 
+cancerDir = "data/NYSDOH_CancerMapping_Data_2005_2009/"
+cancerFile = "NYSDOH_CancerMapping_Data_2005_2009.csv"
+indivCancer = pd.read_csv(cancerDir+cancerFile)
+
 def readIndivCancer_County():
 	# Individual cancer data
 	# Counts of newly diagnosed cancer among New York State residents
-	cancerDir = "data/NYSDOH_CancerMapping_Data_2005_2009/"
-	cancerFile = "NYSDOH_CancerMapping_Data_2005_2009.csv"
-	indivCancer = pd.read_csv(cancerDir+cancerFile)
 
 	indivCancer['countyCode'] = indivCancer['geoid10'].str.slice(2,5)
 	limited = indivCancer[[indivCancer.columns[-1]] + [indivCancer.columns[0]] + list(indivCancer.columns[1:26])]
@@ -37,6 +38,22 @@ def readIndivCancer_County():
 	indivCanMrg = indivCanMrg.drop(['state', 'sCode', 'cCode', 'county', 'h'], 1)
 	return indivCanMrg
 
+def readIndivCancer_Tract():
+	# Individual cancer data
+	# Counts of newly diagnosed cancer among New York State residents
+
+	indivCancer['tractCode'] = indivCancer['geoid10'].str.slice(2,11)
+	limited = indivCancer[[indivCancer.columns[-1]] + [indivCancer.columns[0]] + list(indivCancer.columns[1:26])]
+	ls = list(limited.columns.values)[2:]
+	byTract = limited.groupby('tractCode')
+	aggIndivCan = pd.DataFrame()
+	for i in ls:
+	    aggIndivCan[i] = byTract[i].aggregate(np.sum)
+	aggIndivCan = aggIndivCan.reset_index()
+	# indivCanMrg = pd.merge(aggIndivCan, fips, left_on = 'countyCode', right_on = 'cCode')
+	# indivCanMrg = indivCanMrg.drop(['state', 'sCode', 'cCode', 'county', 'h'], 1)
+	return aggIndivCan
+
 def mergeCancer_County():
 
 	# allCanMrg = readAllCancer_County()
@@ -46,10 +63,32 @@ def mergeCancer_County():
 	canCols = indivCanMrgPop.columns.values[1:-3]
 	for i in canCols:
 		indivCanMrgPop[i+'-Per100k'] = indivCanMrgPop[i]*100000/indivCanMrgPop['totPop']
-	newCols = [x for x in list(indivCanMrgPop.columns.values) if x not in ['countyCode', 'countyFIPS', 'totPop']]
-	for x in ['totPop', 'countyFIPS']:
+	indivCanMrgPop.drop(canCols, inplace=True,axis=1)
+	indivCanMrgPop['geoid5'] = '36'+indivCanMrgPop['countyFIPS']
+	newCols = [x for x in list(indivCanMrgPop.columns.values) if x not in ['countyCode', 'countyFIPS', 'totPop', 'countyName', 'geoid5']]
+	for x in ['totPop', 'countyName', 'countyFIPS', 'geoid5']:
 		newCols.insert(0, x)
 	indivCanMrgPop = indivCanMrgPop[newCols]
+	return indivCanMrgPop
+
+def mergeCancer_Tract():
+
+	# allCanMrg = readAllCancer_County()
+	acsTract = popData('tract')
+	# print acsTract['tractFIPS']
+	indivCanMrg = readIndivCancer_Tract()
+	# print indivCanMrg['tractCode']
+	indivCanMrgPop = pd.merge(indivCanMrg, acsTract[['countyFIPS', 'tractFIPS', 'totPop']], left_on = 'tractCode', right_on = 'tractFIPS')
+	canCols = indivCanMrgPop.columns.values[1:-3]
+	for i in canCols:
+		indivCanMrgPop[i+'-Per100k'] = indivCanMrgPop[i]*100000/indivCanMrgPop['totPop']
+	indivCanMrgPop.drop(canCols, inplace=True,axis=1)
+	indivCanMrgPop['geoid11'] = '36'+indivCanMrgPop['tractFIPS']
+	newCols = [x for x in list(indivCanMrgPop.columns.values) if x not in ['tractCode', 'tractFIPS', 'countyFIPS', 'totPop', 'countyName', 'geoid11']]
+	for x in ['totPop','tractFIPS', 'geoid11']:
+		newCols.insert(0, x)
+	indivCanMrgPop = indivCanMrgPop[newCols]
+	# print indivCanMrgPop
 	return indivCanMrgPop
 
 def readIndivCancer_CensusTract():
@@ -64,4 +103,5 @@ def readIndivCancer_CensusTract():
 	#print indivCancer
 	return indivCancer
 
-
+# print mergeCancer_Tract()[:5]
+# print mergeCancer_County()[:5]
