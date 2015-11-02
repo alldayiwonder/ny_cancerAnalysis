@@ -32,7 +32,7 @@ def main_County():
 	testOls.drop(['County Name', 'Location', '95% CI', 'cCode'], inplace=True, axis=1)
 	# print testOls.columns.values
 	# mod = smf.ols(formula='observed_Total_Per100k ~ n_5_1_fugitive_air + n_5_2_stack_air + n_5_2_stack_air_benzene + n_5_1_fugitive_air_benzene', data = testOls).fit()
-	mod = smf.ols(formula='observed_Total_Per100k ~ n_5_1_fugitive_air + n_5_2_stack_air + n_5_2_stack_air_benzene + n_5_1_fugitive_air_benzene + pctSmoking', data = testOls).fit()
+	mod = smf.ols(formula='observed_Total_Per100k ~ n_5_1_fugitive_air + n_5_2_stack_air + pctSmoking', data = testOls).fit()
 	print(mod.summary())
 	
 	print 
