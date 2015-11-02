@@ -46,7 +46,7 @@ def main_CensusTract():
 	#print data_merged
 
 	print 
-	print '============================ County Level Correlation Table ============================'
+	print '============================ Census Tract Level Correlation Table ============================'
 	print data_merged.corr()
 	# print allCancer['geoid10']
 	# print airEmissions['geoid']
