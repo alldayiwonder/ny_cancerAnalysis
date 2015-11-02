@@ -25,12 +25,14 @@ def main_County():
 	data_merged = data_merged.drop('county', 1)
 	#print data_merged 
 
-	smokeMerge = pd.merge(allCancer, smoking, left_on ='countyName', right_on = 'County Name')
+	smokeMerge = pd.merge(data_merged, smoking, left_on ='countyName', right_on = 'County Name')
 	
 	print 
 	print '============================ County Level Correlation Table ============================'
-	# print data_merged.corr()
-	print smokeMerge.corr()
+
+	correlation_table = smokeMerge.corr()
+	correlation_table.to_csv('data/county_correlationTable.csv')
+	print correlation_table
 
 def main_CensusTract():
 	# Import air data
@@ -50,11 +52,11 @@ def main_CensusTract():
 
 	print 
 	print '============================ Census Tract Level Correlation Table ============================'
-	print data_merged.corr()
-	# print allCancer['geoid10']
-	# print airEmissions['geoid']
+	correlation_table = data_merged.corr()
+	correlation_table.to_csv('data/censusTract_correlationTable.csv')
+	print correlation_table
 
-# main_CensusTract()
+#main_CensusTract()
 main_County()
 
 
