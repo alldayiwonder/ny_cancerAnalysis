@@ -39,7 +39,7 @@ def main_County():
 	print '============================ County Level Correlation Table ============================'
 
 	correlation_table = smokeMerge.corr()
-	correlation_table.to_csv('data/county_correlationTable.csv')
+	correlation_table.to_csv('data/CorrelationTable/county_correlationTable.csv')
 	#print correlation_table
 
 def main_CensusTract():
@@ -61,7 +61,7 @@ def main_CensusTract():
 	print 
 	print '============================ Census Tract Level Correlation Table ============================'
 	correlation_table = data_merged.corr()
-	correlation_table.to_csv('data/censusTract_correlationTable.csv')
+	correlation_table.to_csv('data/CorrelationTable/censusTract_correlationTable.csv')
 	print correlation_table
 
 #main_CensusTract()
