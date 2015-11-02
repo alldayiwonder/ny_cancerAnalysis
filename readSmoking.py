@@ -9,4 +9,9 @@ def readSmoking():
 	subSmok['County Name'] = subSmok['County Name'].str.upper().str.strip()
 	smokMrg = pd.merge(subSmok, fips, left_on = 'County Name', right_on = 'countyName')
 	smokMrg = smokMrg.drop(['state', 'sCode', 'county', 'h', 'countyName'], 1)
+	cols = smokMrg.columns.values
+	cols[1] = 'pctSmoking'
+	smokMrg.columns = cols
 	return smokMrg
+
+# print readSmoking()
