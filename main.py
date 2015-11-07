@@ -34,9 +34,6 @@ def main_County():
 	# mod = smf.ols(formula='observed_Total_Per100k ~ n_5_1_fugitive_air + n_5_2_stack_air + n_5_2_stack_air_benzene + n_5_1_fugitive_air_benzene', data = testOls).fit()
 	mod = smf.ols(formula='observed_Total_Per100k ~ n_5_1_fugitive_air + n_5_2_stack_air + pctSmoking', data = testOls).fit()
 	print(mod.summary())
-	
-	print 
-	print '============================ County Level Correlation Table ============================'
 
 	correlation_table = smokeMerge.corr()
 	correlation_table.to_csv('data/CorrelationTable/county_correlationTable.csv')
@@ -66,10 +63,16 @@ def main_CensusTract():
 	#print data_merged
 
 	print 
-	print '============================ Census Tract Level Correlation Table ============================'
+	print '============= Total Cancer Incidence vs Total Air Emissions at Census Tract Level ============='
+	print 
 	correlation_table = data_merged.corr()
 	correlation_table.to_csv('data/CorrelationTable/censusTract_correlationTable.csv')
 	mod = smf.ols(formula='observed_Total_Per100k ~ airTotal + pctSmoking + pctElderly + income + higherEd + unemploy', data = data_merged).fit()
+	print(mod.summary())
+	print 
+	print '============= Leukemia Incidence vs Fugitive Xylene Emissions at Census Tract Level ============='
+	print 
+	mod = smf.ols(formula='observed_Leukemia_Per100k ~ n_5_1_fugitive_air_xylene + pctSmoking + pctElderly + income', data = data_merged).fit()
 	print(mod.summary())
 
 main_CensusTract()
