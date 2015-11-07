@@ -69,7 +69,7 @@ def main_CensusTract():
 	print '============================ Census Tract Level Correlation Table ============================'
 	correlation_table = data_merged.corr()
 	correlation_table.to_csv('data/CorrelationTable/censusTract_correlationTable.csv')
-	mod = smf.ols(formula='observed_Total_Per100k ~ airTotal + pctSmoking + pctElderly + income', data = data_merged).fit()
+	mod = smf.ols(formula='observed_Total_Per100k ~ airTotal + pctSmoking + pctElderly + income + higherEd + unemploy', data = data_merged).fit()
 	print(mod.summary())
 
 main_CensusTract()
