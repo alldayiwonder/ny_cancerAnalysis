@@ -32,7 +32,7 @@ def popData(geoLevel):
 	# print edTractData['higherEd'].describe()
 	# print edTractData['unemploy'].describe()
 	merged = pd.merge(data, toAdd)
-	print merged
+	# print merged
 	return merged
 
 popData('tract')
