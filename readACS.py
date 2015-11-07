@@ -21,6 +21,7 @@ def popData(geoLevel):
 	if geoLevel == 'tract':
 		data['tractFIPS'] = data['Geo_FIPS'].str[2:]
 
+<<<<<<< HEAD
 	edTractData = pd.read_csv('data/ACS/education/R11060084_SL140.csv', dtype={'Geo_FIPS': str})
 	# print edTractData[['SE_T025_002','SE_T150_002']]
 	# print edTractData[edTractData['SE_T025_002'] != edTractData['SE_T150_002']]
@@ -35,3 +36,6 @@ def popData(geoLevel):
 	return merged
 
 popData('tract')
+=======
+
+>>>>>>> origin/master

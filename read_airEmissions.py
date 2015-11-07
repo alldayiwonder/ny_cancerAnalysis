@@ -51,12 +51,11 @@ def read_airEmissions_CensusTract():
 	
 	# Total emissions per census tract, total of 498 tracts in TRI data set
 	airEmissions_total = airEmissions_trim.groupby(['geoid'], as_index=False).aggregate(np.sum)
-	
+
 	# Emissions for each chemical per census tract
 	airEmissions_allchemicals = airEmissions_trim.groupby(['geoid', 'chemical'], as_index=False).aggregate(np.sum)
-	
-	# Optional code
-	# Finds only those records where stack and fugitive emissions are greater than arbitray value
+
+	# Finds only those records where stack and fugitive emissions are greater than zero
 	airEmissions_allchemicals = airEmissions_allchemicals[(airEmissions_allchemicals.n_5_2_stack_air > 0) | (airEmissions_allchemicals.n_5_1_fugitive_air > 0)]  
 	
 	# List unique chemicals 
@@ -80,14 +79,23 @@ def read_airEmissions_CensusTract():
 	airEmissions_xylene = airEmissions_xylene.rename(columns={'n_5_1_fugitive_air': 'n_5_1_fugitive_air_xylene', 'n_5_2_stack_air': 'n_5_2_stack_air_xylene'})
 
 	# Merge the aggregation of each specific chemical with the total emissions per county for the main file
+	airEmissions_total['airTotal'] = airEmissions_total['n_5_2_stack_air'] + airEmissions_total['n_5_1_fugitive_air'] 
+	
 	data_merged_benz = pd.merge(airEmissions_total, airEmissions_benzene)
 	data_merged_benz = data_merged_benz.drop('chemical', 1)
+	data_merged_benz['benzeneTotal'] = data_merged_benz['n_5_1_fugitive_air_benzene'] + data_merged_benz['n_5_2_stack_air_benzene'] 
+
 	data_merged_tol = pd.merge(data_merged_benz, airEmissions_toluene)
 	data_merged_tol = data_merged_tol.drop('chemical', 1)
+	data_merged_tol['tolueneTotal'] = data_merged_tol['n_5_1_fugitive_air_toluene'] + data_merged_tol['n_5_2_stack_air_toluene'] 
+	
 	data_merged_ebenz = pd.merge(data_merged_tol, airEmissions_ethylbenzene)
 	data_merged_ebenz = data_merged_ebenz.drop('chemical', 1)
+	data_merged_ebenz['ebenzTotal'] = data_merged_ebenz['n_5_1_fugitive_air_ethylbenzene'] + data_merged_ebenz['n_5_2_stack_air_ethylbenzene'] 
+	
 	data_merged_xylene = pd.merge(data_merged_ebenz, airEmissions_xylene)
 	data_merged_xylene = data_merged_xylene.drop('chemical', 1)
+	data_merged_xylene['xyleneTotal'] = data_merged_xylene['n_5_1_fugitive_air_xylene'] + data_merged_xylene['n_5_2_stack_air_xylene'] 
 	return data_merged_xylene
 
 #read_airEmissions_County()
