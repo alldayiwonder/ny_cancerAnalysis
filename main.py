@@ -73,8 +73,6 @@ def main_CensusTract():
 	mod = smf.ols(formula='observed_Total_Per100k ~ n_5_1_fugitive_air + n_5_2_stack_air + pctSmoking + pctElderly + income', data = data_merged).fit()
 	print(mod.summary())
 
-	# print data_merged
-main_CensusTract()
-# main_County()
+
 
 
