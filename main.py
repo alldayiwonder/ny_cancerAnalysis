@@ -64,7 +64,7 @@ def main_CensusTract():
 	correlation_table.to_csv('data/CorrelationTable/censusTract_correlationTable.csv')
 	print correlation_table
 
-#main_CensusTract()
-main_County()
+main_CensusTract()
+#main_County()
 
 
