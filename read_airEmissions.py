@@ -48,6 +48,7 @@ def read_airEmissions_CensusTract():
 	# Trim dataframe and groupby census tract and aggregate fugitive and stack air emissions 
 	airEmissions_trim = airEmissions[['geoid','tri_facility_id','facility_name','county', 'n_5_1_fugitive_air','n_5_2_stack_air', 'chemical']]
 	airEmissions_trim['geoid'] = airEmissions_trim['geoid'].str.slice(0,11)  # Make sure geoid does not include block
+	airEmissions_trim['stack_fugitive_airTotal'] = df['n_5_2_stack_air'] + df['n_5_1_fugitive_air']  # assigned to a column
 	
 	# Total emissions per census tract, total of 498 tracts in TRI data set
 	airEmissions_total = airEmissions_trim.groupby(['geoid'], as_index=False).aggregate(np.sum)
@@ -55,8 +56,7 @@ def read_airEmissions_CensusTract():
 	# Emissions for each chemical per census tract
 	airEmissions_allchemicals = airEmissions_trim.groupby(['geoid', 'chemical'], as_index=False).aggregate(np.sum)
 	
-	# Optional code
-	# Finds only those records where stack and fugitive emissions are greater than arbitray value
+	# Finds only those records where stack and fugitive emissions are greater than zero
 	airEmissions_allchemicals = airEmissions_allchemicals[(airEmissions_allchemicals.n_5_2_stack_air > 0) | (airEmissions_allchemicals.n_5_1_fugitive_air > 0)]  
 	
 	# List unique chemicals 
