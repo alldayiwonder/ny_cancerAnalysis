@@ -20,6 +20,18 @@ def popData(geoLevel):
 	data['countyFIPS'] = data['Geo_FIPS'].str[2:5]
 	if geoLevel == 'tract':
 		data['tractFIPS'] = data['Geo_FIPS'].str[2:]
-	return data
 
-print popData('tract')
+	edTractData = pd.read_csv('data/ACS/education/R11060084_SL140.csv', dtype={'Geo_FIPS': str})
+	# print edTractData[['SE_T025_002','SE_T150_002']]
+	# print edTractData[edTractData['SE_T025_002'] != edTractData['SE_T150_002']]
+	edTractData['higherEd'] = (edTractData['SE_T025_001'] - (edTractData['SE_T025_002'] + edTractData['SE_T025_003'])) / edTractData['SE_T025_001']
+	edTractData['unemploy'] = edTractData['SE_T037_003'] / edTractData['SE_T037_001']
+	toAdd = edTractData[['Geo_FIPS', 'higherEd', 'unemploy']]
+	# print data
+	# print edTractData['higherEd'].describe()
+	# print edTractData['unemploy'].describe()
+	merged = pd.merge(data, toAdd)
+	print merged
+	return merged
+
+popData('tract')
