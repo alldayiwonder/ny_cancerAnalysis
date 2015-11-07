@@ -12,10 +12,7 @@ def readSmoking():
 	cols = smokMrg.columns.values
 	cols[1] = 'pctSmoking'
 	smokMrg.columns = cols
-<<<<<<< HEAD
-	# print smokMrg['pctSmoking'].describe()
-=======
->>>>>>> origin/master
+
 
 	return smokMrg
 
