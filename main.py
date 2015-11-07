@@ -50,12 +50,19 @@ def main_CensusTract():
 	# allCancer = readIndivCancer_CensusTract()  # NEED TO NORMALIZE COUNTS WITH POPULATION VALUE
 	allCancer = mergeCancer_Tract()
 
+	# Import smoking data
+	smoking = readSmoking()  # PRODUCING A WARNING
+
 	# Import census tract level population data
-	# acsTract = popData('tract')
+	acsTract = popData('tract')
+
+	acsSmoke = pd.merge(smoking, acsTract, left_on = 'cCode', right_on = 'countyFIPS')
 
 	# Join air emission data with cancer rates data
 	data_merged = pd.merge(allCancer, airEmissions, left_on = 'geoid11', right_on = 'geoid')
 	data_merged = data_merged.drop('geoid', 1)	
+	data_merged['countyCode'] = data_merged['tractFIPS'].str[:3]
+	data_merged = pd.merge(data_merged, acsSmoke, left_on = 'countyCode', right_on = 'countyFIPS')
 	#print data_merged
 
 	print 
@@ -63,8 +70,11 @@ def main_CensusTract():
 	correlation_table = data_merged.corr()
 	correlation_table.to_csv('data/CorrelationTable/censusTract_correlationTable.csv')
 	print correlation_table
+	mod = smf.ols(formula='observed_Total_Per100k ~ n_5_1_fugitive_air + n_5_2_stack_air + pctSmoking + pctElderly + income', data = data_merged).fit()
+	print(mod.summary())
 
-#main_CensusTract()
-main_County()
+	# print data_merged
+main_CensusTract()
+# main_County()
 
 
