@@ -22,8 +22,4 @@ def popData(geoLevel):
 		data['tractFIPS'] = data['Geo_FIPS'].str[2:]
 	return data
 
-<<<<<<< Updated upstream
-print popData('tract')
-=======
-#print popData('tract')
->>>>>>> Stashed changes
+

@@ -12,8 +12,7 @@ def readSmoking():
 	cols = smokMrg.columns.values
 	cols[1] = 'pctSmoking'
 	smokMrg.columns = cols
-	print smokMrg['pctSmoking'].describe()
 
 	return smokMrg
 
-readSmoking()
+#readSmoking()
