@@ -33,12 +33,14 @@ def main_County():
 	testOls.drop(['County Name', 'Location', '95% CI', 'cCode'], inplace=True, axis=1)
 	# print testOls.columns.values
 	# mod = smf.ols(formula='observed_Total_Per100k ~ n_5_1_fugitive_air + n_5_2_stack_air + n_5_2_stack_air_benzene + n_5_1_fugitive_air_benzene', data = testOls).fit()
-	mod = smf.ols(formula='observed_Total_Per100k ~ n_5_1_fugitive_air + n_5_2_stack_air + pctSmoking', data = testOls).fit()
-	print(mod.summary())
+	# mod = smf.ols(formula='observed_Total_Per100k ~ n_5_1_fugitive_air + n_5_2_stack_air + pctSmoking', data = testOls).fit()
+	# print(mod.summary())
 
 	correlation_table = smokeMerge.corr()
 	correlation_table.to_csv('data/CorrelationTable/county_correlationTable.csv')
 	#print correlation_table
+
+###################################################################################################
 
 def main_CensusTract():
 	# Import air data
@@ -57,8 +59,7 @@ def main_CensusTract():
 	acsSmoke = pd.merge(smoking, acsTract, left_on = 'cCode', right_on = 'countyFIPS')
 
 	# Join air emission data with cancer rates data
-	data_merged = pd.merge(allCancer, airEmissions, how='outer', left_on = 'geoid11', right_on = 'geoid')
-	data_merged.fillna(0, inplace=True)
+	data_merged = pd.merge(allCancer, airEmissions, how='left', left_on = 'geoid11', right_on = 'geoid')
 	data_merged = data_merged.drop('geoid', 1)	
 	data_merged['countyCode'] = data_merged['tractFIPS'].str[:3]
 	data_merged = pd.merge(data_merged, acsSmoke, left_on = 'countyCode', right_on = 'countyFIPS')
@@ -87,11 +88,12 @@ def main_CensusTract():
 	mod = smf.ols(formula='observed_Oral_Per100k ~ n_5_1_fugitive_air_benzene+ pctSmoking + pctElderly + income', data = data_merged).fit()
 	print(mod.summary())
 
-	print 
-	print '============= Correlation Table Heatmap ============='
-	print 
-	hm(correlation_table)
+	# print 
+	# print '============= Correlation Table Heatmap ============='
+	# print 
+	# hm(correlation_table)
 
 main_CensusTract()
+#main_County()
 
 
