@@ -26,4 +26,4 @@ def hm(corr):
 	plt.yticks(rotation=0) 
 	plt.xticks(rotation=90)
 	# plt.show()
-	plt.savefig('corrHM.png', bbox_inches='tight')
+	plt.savefig('data/CorrelationTable/corrHM.png', bbox_inches='tight')

@@ -7,16 +7,16 @@ from readACS import popData
 
 fips = readFips()
 
-
-def readAllCancer_County():
-	# Total cancer rate, age adjusted
-	# Data from https://health.data.ny.gov/Health/Community-Health-All-Cancer-Incidence-Age-adjusted/4wxt-6bzs
-	allCancer = pd.read_csv('data/Community_Health__All_Cancer_Incidence_Age-adjusted_Rate_per_100_000_by_County_Maps__Latest_Data.csv')
-	allCancer['County Name'] = allCancer['County Name'].str.upper().str.strip()
-	allCanMrg = pd.merge(allCancer, fips, left_on = 'County Name', right_on = 'countyName')
-	allCanMrg = allCanMrg.drop(['state', 'sCode', 'county', 'h', 'countyName'], 1)
-	allCanMrg = allCanMrg[['County Name', 'Percent/Rate', 'cCode', 'Average Number of Denominator']]
-	return allCanMrg
+# DON'T THINK WE EVER USE THIS!
+# def readAllCancer_County():
+# 	# Total cancer rate, age adjusted
+# 	# Data from https://health.data.ny.gov/Health/Community-Health-All-Cancer-Incidence-Age-adjusted/4wxt-6bzs
+# 	allCancer = pd.read_csv('data/Community_Health__All_Cancer_Incidence_Age-adjusted_Rate_per_100_000_by_County_Maps__Latest_Data.csv')
+# 	allCancer['County Name'] = allCancer['County Name'].str.upper().str.strip()
+# 	allCanMrg = pd.merge(allCancer, fips, left_on = 'County Name', right_on = 'countyName')
+# 	allCanMrg = allCanMrg.drop(['state', 'sCode', 'county', 'h', 'countyName'], 1)
+# 	allCanMrg = allCanMrg[['County Name', 'Percent/Rate', 'cCode', 'Average Number of Denominator']]
+# 	return allCanMrg
 
 cancerDir = "data/NYSDOH_CancerMapping_Data_2005_2009/"
 cancerFile = "NYSDOH_CancerMapping_Data_2005_2009.csv"
@@ -91,17 +91,18 @@ def mergeCancer_Tract():
 	# print indivCanMrgPop
 	return indivCanMrgPop
 
-def readIndivCancer_CensusTract():
-	# GEOID10 field, 12 digits: STATE (2) + COUNTY (3) + TRACT (6) + BLOCK GROUP (1)
-	# Example GEOID10: 482012231001 <- Block Group 1 in Census Tract 2231 in Harris County, TX
-	# Need to slice the block digit off of GEOID10 field to get census tract only 
-	cancerDir = "data/NYSDOH_CancerMapping_Data_2005_2009/"
-	cancerFile = "NYSDOH_CancerMapping_Data_2005_2009.csv"
-	indivCancer = pd.read_csv(cancerDir+cancerFile)	
-	indivCancer['geoid10'] = indivCancer['geoid10'].str.slice(0,11)
-	indivCancer = indivCancer.groupby(['geoid10'], as_index=False).aggregate(np.sum)
-	#print indivCancer
-	return indivCancer
+# DON'T THINK WE EVER USE THIS!!
+# def readIndivCancer_CensusTract():
+# 	# GEOID10 field, 12 digits: STATE (2) + COUNTY (3) + TRACT (6) + BLOCK GROUP (1)
+# 	# Example GEOID10: 482012231001 <- Block Group 1 in Census Tract 2231 in Harris County, TX
+# 	# Need to slice the block digit off of GEOID10 field to get census tract only 
+# 	cancerDir = "data/NYSDOH_CancerMapping_Data_2005_2009/"
+# 	cancerFile = "NYSDOH_CancerMapping_Data_2005_2009.csv"
+# 	indivCancer = pd.read_csv(cancerDir+cancerFile)	
+# 	indivCancer['geoid10'] = indivCancer['geoid10'].str.slice(0,11)
+# 	indivCancer = indivCancer.groupby(['geoid10'], as_index=False).aggregate(np.sum)
+# 	#print indivCancer
+# 	return indivCancer
 
 # print mergeCancer_Tract()[:5]
 # print mergeCancer_County()[:5]

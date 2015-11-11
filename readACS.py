@@ -4,8 +4,10 @@ import pandas as pd
 def popData(geoLevel):
 	if geoLevel == 'county':
 		fn = 'data/ACS/R11053959_SL050.csv'
+		fnEd = 'data/ACS/education/R11064263_SL050.csv'
 	elif geoLevel == 'tract':
 		fn = 'data/ACS/R11053959_SL140.csv'
+		fnEd = 'data/ACS/education/R11060084_SL140.csv'
 
 	data = pd.read_csv(fn, dtype={'Geo_FIPS': str})
 	#taking fips, tot pop, male pop, age 65-74, 75-84, and 85+, median household income
@@ -21,7 +23,7 @@ def popData(geoLevel):
 	if geoLevel == 'tract':
 		data['tractFIPS'] = data['Geo_FIPS'].str[2:]
 
-	edTractData = pd.read_csv('data/ACS/education/R11060084_SL140.csv', dtype={'Geo_FIPS': str})
+	edTractData = pd.read_csv(fnEd, dtype={'Geo_FIPS': str})
 	# print edTractData[['SE_T025_002','SE_T150_002']]
 	# print edTractData[edTractData['SE_T025_002'] != edTractData['SE_T150_002']]
 	edTractData['higherEd'] = (edTractData['SE_T025_001'] - (edTractData['SE_T025_002'] + edTractData['SE_T025_003'])) / edTractData['SE_T025_001']
@@ -34,5 +36,5 @@ def popData(geoLevel):
 	# print merged
 	return merged
 
-popData('tract')
+print popData('tract')
 
