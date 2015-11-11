@@ -103,5 +103,5 @@ def readIndivCancer_CensusTract():
 	#print indivCancer
 	return indivCancer
 
-print mergeCancer_Tract()[:5]
+# print mergeCancer_Tract()[:5]
 # print mergeCancer_County()[:5]
