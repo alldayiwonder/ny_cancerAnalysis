@@ -103,6 +103,7 @@ def read_airEmissions_CensusTract():
 	data_merged_benz['benzeneTotal'] = data_merged_benz['n_5_1_fugitive_air_benzene'] + data_merged_benz['n_5_2_stack_air_benzene'] 
 
 	data_merged_tol = pd.merge(data_merged_benz, airEmissions_toluene, how='outer')
+
 	data_merged_tol = data_merged_tol.drop('chemical', 1)
 	data_merged_tol['tolueneTotal'] = data_merged_tol['n_5_1_fugitive_air_toluene'] + data_merged_tol['n_5_2_stack_air_toluene'] 
 	
@@ -122,7 +123,7 @@ def read_airEmissions_CensusTract():
 	return data_merged_formaldehyde  #Need to change to formaldehyde, but fix error first
 
 #read_airEmissions_County()
-#read_airEmissions_CensusTract()
+read_airEmissions_CensusTract()
 
 
 

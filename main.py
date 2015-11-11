@@ -3,6 +3,7 @@ from read_airEmissions import read_airEmissions_CensusTract
 from readAllCancer import readIndivCancer_CensusTract, mergeCancer_Tract, mergeCancer_County
 from readSmoking import readSmoking
 from readACS import popData
+from corrHeatMap import hm
 import pandas as pd 
 import statsmodels.formula.api as smf
 
@@ -84,6 +85,11 @@ def main_CensusTract():
 	print 
 	mod = smf.ols(formula='observed_Oral_Per100k ~ n_5_1_fugitive_air_benzene+ pctSmoking + pctElderly + income', data = data_merged).fit()
 	print(mod.summary())
+
+	print 
+	print '============= Correlation Table Heatmap ============='
+	print 
+	hm(correlation_table)
 
 main_CensusTract()
 
