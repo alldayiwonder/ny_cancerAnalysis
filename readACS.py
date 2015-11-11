@@ -36,5 +36,5 @@ def popData(geoLevel):
 	# print merged
 	return merged
 
-print popData('county')
+print popData('tract')
 
