@@ -58,10 +58,6 @@ def main_CensusTract():
 
 	# Join air emission data with cancer rates data
 	data_merged = pd.merge(allCancer, airEmissions, how='left', left_on = 'geoid11', right_on = 'geoid')
-<<<<<<< HEAD
-=======
-	# data_merged.fillna(0, inplace=True)
->>>>>>> origin/master
 	data_merged = data_merged.drop('geoid', 1)	
 	data_merged['countyCode'] = data_merged['tractFIPS'].str[:3]
 	data_merged = pd.merge(data_merged, smoking, left_on = 'countyCode', right_on = 'cCode')
@@ -95,6 +91,6 @@ def main_CensusTract():
 	# print 
 	# hm(correlation_table)
 
-
+main_CensusTract()
 
 
