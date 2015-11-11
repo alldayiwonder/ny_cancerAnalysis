@@ -1,6 +1,6 @@
 from read_airEmissions import read_airEmissions_County
 from read_airEmissions import read_airEmissions_CensusTract
-from readAllCancer import readIndivCancer_CensusTract, mergeCancer_Tract, mergeCancer_County
+from readAllCancer import mergeCancer_Tract, mergeCancer_County
 from readSmoking import readSmoking
 from readACS import popData
 from corrHeatMap import hm
@@ -54,8 +54,6 @@ def main_CensusTract():
 	# Import census tract level population data
 	acsTract = popData('tract')
 
-	# acsSmoke = pd.merge(smoking, acsTract, left_on = 'cCode', right_on = 'countyFIPS')
-
 	# Join air emission data with cancer rates data
 	data_merged = pd.merge(allCancer, airEmissions, how='left', left_on = 'geoid11', right_on = 'geoid')
 	# data_merged.fillna(0, inplace=True)
@@ -93,5 +91,6 @@ def main_CensusTract():
 	hm(correlation_table)
 
 main_CensusTract()
+# main_County()
 
 
