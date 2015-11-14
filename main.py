@@ -58,6 +58,7 @@ def main_CensusTract():
 
 	# Join air emission data with cancer rates data
 	data_merged = pd.merge(allCancer, airEmissions, how='left', left_on = 'geoid11', right_on = 'geoid')
+	data_merged.fillna(0, inplace=True)  # To avoid losing those tracts in model with smoking and demographic data but no chemical releases 
 	data_merged = data_merged.drop('geoid', 1)	
 	data_merged['countyCode'] = data_merged['tractFIPS'].str[:3]
 	data_merged = pd.merge(data_merged, smoking, left_on = 'countyCode', right_on = 'cCode')
@@ -73,17 +74,29 @@ def main_CensusTract():
 	print 
 	print '============= Leukemia Incidence vs Fugitive Xylene Emissions at Census Tract Level ============='
 	print 
-	mod = smf.ols(formula='observed_Leukemia_Per100k ~ n_5_1_fugitive_air_xylene + pctSmoking + pctElderly + income', data = data_merged).fit()
+	mod = smf.ols(formula='observed_Leukemia_Per100k ~ n_5_1_fugitive_air_xylene + pctSmoking + pctElderly + income + higherEd + unemploy', data = data_merged).fit()
 	print(mod.summary())
 	print
 	print '============= Bladder Incidence vs Fugitive Toluene Emissions at Census Tract Level ============='
 	print 
-	mod = smf.ols(formula='observed_Bladder_Per100k ~ n_5_1_fugitive_air_toluene + pctSmoking + pctElderly + income', data = data_merged).fit()
+	mod = smf.ols(formula='observed_Bladder_Per100k ~ n_5_1_fugitive_air_toluene + pctSmoking + pctElderly + income + higherEd + unemploy', data = data_merged).fit()
 	print(mod.summary())
 	print
 	print '============= Oral Incidence vs Fugitive Benzene Emissions at Census Tract Level ============='
 	print 
-	mod = smf.ols(formula='observed_Oral_Per100k ~ n_5_1_fugitive_air_benzene+ pctSmoking + pctElderly + income', data = data_merged).fit()
+	mod = smf.ols(formula='observed_Oral_Per100k ~ n_5_1_fugitive_air_benzene + pctSmoking + pctElderly + income + higherEd + unemploy', data = data_merged).fit()
+	print(mod.summary())
+	print
+	print '============= Lung Incidence vs Total Ethylbenzene Emissions at Census Tract Level ============='
+	print 
+	mod = smf.ols(formula='observed_Lung_Per100k ~ ethylbenzeneTotal + \
+		pctSmoking + pctElderly + income + higherEd + unemploy', data = data_merged).fit()
+	print(mod.summary())
+	print
+	print '============= Lung Incidence vs BTEX Emissions at Census Tract Level ============='
+	print 
+	mod = smf.ols(formula='observed_Lung_Per100k ~ BTEX_stack + \
+		pctSmoking + pctElderly + income + higherEd + unemploy', data = data_merged).fit()
 	print(mod.summary())
 
 	# print 
