@@ -74,7 +74,7 @@ def main_CensusTract():
 	print 
 	print '============= Leukemia Incidence vs Fugitive Xylene Emissions at Census Tract Level ============='
 	print 
-	mod = smf.ols(formula='observed_Leukemia_Per100k ~ n_5_1_fugitive_air_xylene + pctSmoking + pctElderly + income + higherEd + unemploy', data = data_merged).fit()
+	mod = smf.ols(formula='observed_Leukemia_Per100k ~ n_5_1_fugitive_air_benzene + pctSmoking + pctElderly + income + higherEd + unemploy', data = data_merged).fit()
 	print(mod.summary())
 	print
 	print '============= Bladder Incidence vs Fugitive Toluene Emissions at Census Tract Level ============='

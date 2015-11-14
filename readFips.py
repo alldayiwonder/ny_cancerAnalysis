@@ -18,9 +18,11 @@ def addGEOID_TRI():
 	"""
 	This function adds a 15 digit geoid code to each record in the TRI csv and outputs a new csv for read_airEmissions file
 	"""
-
+	##############
+	# FILE INPUT #
+	##############
 	# TRI file contains 2095 records. Process takes roughly 14 minutes for this file.
-	airEmissions = pd.read_csv('data/EPA_TRI/enigma-us.gov.epa.toxic-release-inventory.ny.2013-63f546aac1daadc29b6fad5f6812568f.csv')
+	airEmissions = pd.read_csv('data/EPA_TRI/mergedData2.csv')
 
 	# Get the Census Tract code for each facility from lat long
 	# FCC API to get census block data from lat long
@@ -28,10 +30,13 @@ def addGEOID_TRI():
 	airEmissions["geoid"] = np.nan
 	for index, row in airEmissions.iterrows():
 		try:
-			latitude = airEmissions.values[index][10]
-			longitude = airEmissions.values[index][11]
-			url = 'http://data.fcc.gov/api/block/find?format=json&latitude='+str(latitude)+'&longitude='+str(longitude)+'&showall=true'
+			#############################
+			# SET LAT & LONG COLUMNS    #
+			#############################
 
+			latitude = airEmissions.values[index][2]
+			longitude = airEmissions.values[index][3]
+			url = 'http://data.fcc.gov/api/block/find?format=json&latitude='+str(latitude)+'&longitude='+str(longitude)+'&showall=true'
 			# Get GEOID10, 15 digit version
 			result = requests.get(url).json()  # Returns json as dict
 			geoid = str(result['Block']['FIPS'])  # STATE+COUNTY+TRACT+BLOCK, 2+3+6+4=15 (Some blocks contain one character suffix (e.g. A))
@@ -39,12 +44,16 @@ def addGEOID_TRI():
 			# Add geoid code to dataframe
 			airEmissions.loc[index, "geoid"] = geoid
 			
-			print latitude, longitude, airEmissions.values[index][2], airEmissions.values[index][103], url
-
+			print latitude, longitude, airEmissions.values[index][1], url
+			
+			##############
+			# FILE OUTPUT #
+			##############
 			# Write to file
-			airEmissions.to_csv('data/EPA_TRI/toxic-release-inventory.ny.2013.geoid.csv')
+			airEmissions.to_csv('data/EPA_TRI/toxic-release-inventory.ny.2000.geoid.csv')
 		except:
 			pass
 	return airEmissions
 
 #addGEOID_TRI()
+

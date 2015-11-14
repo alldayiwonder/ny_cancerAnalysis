@@ -45,7 +45,7 @@ def read_airEmissions_CensusTract():
 	"""
 
 	# Import the output from readFIPS function addGEOID_TRI. TRI file contains 2097 records.
-	airEmissions = pd.read_csv('data/EPA_TRI/toxic-release-inventory.ny.2013.geoid.csv', index_col=0, dtype={'geoid': str})
+	airEmissions = pd.read_csv('data/EPA_TRI/toxic-release-inventory.ny.2000.geoid.csv', index_col=0, dtype={'geoid': str})
 
 	# Trim dataframe and groupby census tract and aggregate fugitive and stack air emissions 
 	airEmissions_trim = airEmissions[['geoid','tri_facility_id','facility_name','county', 'n_5_1_fugitive_air','n_5_2_stack_air', 'chemical']]
