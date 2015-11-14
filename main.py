@@ -33,12 +33,14 @@ def main_County():
 	testOls.drop(['County Name', 'Location', '95% CI', 'cCode'], inplace=True, axis=1)
 	# print testOls.columns.values
 	# mod = smf.ols(formula='observed_Total_Per100k ~ n_5_1_fugitive_air + n_5_2_stack_air + n_5_2_stack_air_benzene + n_5_1_fugitive_air_benzene', data = testOls).fit()
-	mod = smf.ols(formula='observed_Total_Per100k ~ n_5_1_fugitive_air + n_5_2_stack_air + pctSmoking', data = testOls).fit()
-	print(mod.summary())
+	# mod = smf.ols(formula='observed_Total_Per100k ~ n_5_1_fugitive_air + n_5_2_stack_air + pctSmoking', data = testOls).fit()
+	# print(mod.summary())
 
 	correlation_table = smokeMerge.corr()
 	correlation_table.to_csv('data/CorrelationTable/county_correlationTable.csv')
 	# print correlation_table
+
+###################################################################################################
 
 def main_CensusTract():
 	# Import air data
@@ -56,7 +58,7 @@ def main_CensusTract():
 
 	# Join air emission data with cancer rates data
 	data_merged = pd.merge(allCancer, airEmissions, how='left', left_on = 'geoid11', right_on = 'geoid')
-	# data_merged.fillna(0, inplace=True)
+	data_merged.fillna(0, inplace=True)  # To avoid losing those tracts in model with smoking and demographic data but no chemical releases 
 	data_merged = data_merged.drop('geoid', 1)	
 	data_merged['countyCode'] = data_merged['tractFIPS'].str[:3]
 	data_merged = pd.merge(data_merged, smoking, left_on = 'countyCode', right_on = 'cCode')
@@ -72,25 +74,36 @@ def main_CensusTract():
 	print 
 	print '============= Leukemia Incidence vs Fugitive Xylene Emissions at Census Tract Level ============='
 	print 
-	mod = smf.ols(formula='observed_Leukemia_Per100k ~ n_5_1_fugitive_air_xylene + pctSmoking + pctElderly + income', data = data_merged).fit()
+	mod = smf.ols(formula='observed_Leukemia_Per100k ~ n_5_1_fugitive_air_xylene + pctSmoking + pctElderly + income + higherEd + unemploy', data = data_merged).fit()
 	print(mod.summary())
 	print
 	print '============= Bladder Incidence vs Fugitive Toluene Emissions at Census Tract Level ============='
 	print 
-	mod = smf.ols(formula='observed_Bladder_Per100k ~ n_5_1_fugitive_air_toluene + pctSmoking + pctElderly + income', data = data_merged).fit()
+	mod = smf.ols(formula='observed_Bladder_Per100k ~ n_5_1_fugitive_air_toluene + pctSmoking + pctElderly + income + higherEd + unemploy', data = data_merged).fit()
 	print(mod.summary())
 	print
 	print '============= Oral Incidence vs Fugitive Benzene Emissions at Census Tract Level ============='
 	print 
-	mod = smf.ols(formula='observed_Oral_Per100k ~ n_5_1_fugitive_air_benzene+ pctSmoking + pctElderly + income', data = data_merged).fit()
+	mod = smf.ols(formula='observed_Oral_Per100k ~ n_5_1_fugitive_air_benzene + pctSmoking + pctElderly + income + higherEd + unemploy', data = data_merged).fit()
+	print(mod.summary())
+	print
+	print '============= Lung Incidence vs Total Ethylbenzene Emissions at Census Tract Level ============='
+	print 
+	mod = smf.ols(formula='observed_Lung_Per100k ~ ethylbenzeneTotal + \
+		pctSmoking + pctElderly + income + higherEd + unemploy', data = data_merged).fit()
+	print(mod.summary())
+	print
+	print '============= Lung Incidence vs BTEX Emissions at Census Tract Level ============='
+	print 
+	mod = smf.ols(formula='observed_Lung_Per100k ~ BTEX_stack + \
+		pctSmoking + pctElderly + income + higherEd + unemploy', data = data_merged).fit()
 	print(mod.summary())
 
-	print 
-	print '============= Correlation Table Heatmap ============='
-	print 
-	hm(correlation_table)
+	# print 
+	# print '============= Correlation Table Heatmap ============='
+	# print 
+	# hm(correlation_table)
 
 main_CensusTract()
-# main_County()
 
 

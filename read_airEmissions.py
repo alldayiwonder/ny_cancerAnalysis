@@ -103,13 +103,12 @@ def read_airEmissions_CensusTract():
 	data_merged_benz['benzeneTotal'] = data_merged_benz['n_5_1_fugitive_air_benzene'] + data_merged_benz['n_5_2_stack_air_benzene'] 
 
 	data_merged_tol = pd.merge(data_merged_benz, airEmissions_toluene, how='outer')
-
 	data_merged_tol = data_merged_tol.drop('chemical', 1)
 	data_merged_tol['tolueneTotal'] = data_merged_tol['n_5_1_fugitive_air_toluene'] + data_merged_tol['n_5_2_stack_air_toluene'] 
 	
 	data_merged_ebenz = pd.merge(data_merged_tol, airEmissions_ethylbenzene, how='outer')
 	data_merged_ebenz = data_merged_ebenz.drop('chemical', 1)
-	data_merged_ebenz['ebenzTotal'] = data_merged_ebenz['n_5_1_fugitive_air_ethylbenzene'] + data_merged_ebenz['n_5_2_stack_air_ethylbenzene'] 
+	data_merged_ebenz['ethylbenzeneTotal'] = data_merged_ebenz['n_5_1_fugitive_air_ethylbenzene'] + data_merged_ebenz['n_5_2_stack_air_ethylbenzene'] 
 	
 	data_merged_xylene = pd.merge(data_merged_ebenz, airEmissions_xylene, how='outer')
 	data_merged_xylene = data_merged_xylene.drop('chemical', 1)
@@ -118,12 +117,16 @@ def read_airEmissions_CensusTract():
 	data_merged_formaldehyde = pd.merge(data_merged_xylene, airEmissions_formaldehyde, how='outer')
 	data_merged_formaldehyde = data_merged_formaldehyde.drop('chemical', 1)
 	data_merged_formaldehyde['formaldehydeTotal'] = data_merged_formaldehyde['n_5_1_fugitive_air_formaldehyde'] + data_merged_formaldehyde['n_5_2_stack_air_formaldehyde'] 
-
+	
+	# Create a total for BTEX
+	data_merged_formaldehyde['BTEX_fugitive'] = data_merged_formaldehyde['n_5_1_fugitive_air_benzene'] + data_merged_formaldehyde['n_5_1_fugitive_air_toluene'] + data_merged_formaldehyde['n_5_1_fugitive_air_ethylbenzene'] + data_merged_formaldehyde['n_5_1_fugitive_air_xylene'] 
+	data_merged_formaldehyde['BTEX_stack'] = data_merged_formaldehyde['n_5_2_stack_air_benzene'] + data_merged_formaldehyde['n_5_2_stack_air_toluene'] + data_merged_formaldehyde['n_5_2_stack_air_ethylbenzene'] + data_merged_formaldehyde['n_5_2_stack_air_xylene'] 
+	data_merged_formaldehyde['BTEX_total'] = data_merged_formaldehyde['BTEX_fugitive'] + data_merged_formaldehyde['BTEX_stack']
 
 	return data_merged_formaldehyde  #Need to change to formaldehyde, but fix error first
 
 #read_airEmissions_County()
-# read_airEmissions_CensusTract()
+#read_airEmissions_CensusTract()
 
 
 
