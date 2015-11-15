@@ -1,8 +1,4 @@
 
 *.pyc
 
-*.csv
 
-*.txt
-
-data/CorrelationTable/censusTract_correlationTable.csv
