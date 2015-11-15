@@ -87,13 +87,17 @@ def main_CensusTract():
 			# result_df = pd.DataFrame(index=columns)
 			for cancer in cancer_list:
 				mod = smf.ols(formula=cancer+' ~ '+chemical+' + pctSmoking + pctElderly + income + higherEd + unemploy', data = data_merged).fit()
-				
+				 
 				result_df = pd.DataFrame({
 					'Cancer': cancer,
-					'Coefficient': mod.params.astype(int),
+					'Coefficient': mod.params.apply(lambda x: round(x, 2)),
 		            'p-Value': mod.pvalues.apply(lambda x: round(x, 3)),
 		            'Std. Error': mod.bse.astype(int),
 		            'Adj. R': round(mod.rsquared_adj, 3)})
+
+				# Coefficient for air emission feature is mod.params[1]
+				if mod.params[1] > 1.0:
+					print mod.params[1], mod.pvalues[1], cancer, chemical  
 
 				result_df.to_csv(f)
 
