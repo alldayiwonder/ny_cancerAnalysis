@@ -1,0 +1,149 @@
+--------------------------------------------------------------------------------
+Codebook for Social Explorer report ID: R11060028
+--------------------------------------------------------------------------------
+
+Contents
+    - Table Summary
+    - Data Dictionary
+    - Citation and Use
+
+
+--------------------------------------------------------------------------------
+Table Summary
+--------------------------------------------------------------------------------
+ 
+Survey:           ACS 2009 (5-Year Estimates)
+Dataset:          Social Explorer Tables:  ACS 2009 (5-Year Estimates)
+Tables:
+
+      1. Educational Attainment For Population 25 Years And Over
+         Universe:  Population 25 Years and over
+         Name:      T25
+         Variables:
+            T025_001:   Population 25 Years and over:
+            T025_002:      Less Than High School
+            T025_003:      High School Graduate (includes equivalency)
+            T025_004:      Some college
+            T025_005:      Bachelor's degree
+            T025_006:      Master's degree
+            T025_007:      Professional school degree
+            T025_008:      Doctorate degree
+
+
+      2. Highest Educational Attainment For Population 25 Years And Over
+         Universe:  Population 25 Years and over
+         Name:      T150
+         Variables:
+            T150_001:   Population 25 Years and over:
+            T150_002:      Less Than High School
+            T150_003:      High School Graduate or more (includes equivalency)
+            T150_004:      Some college or more
+            T150_005:      Bachelor's degree or more
+            T150_006:      Master's degree or more
+            T150_007:      Professional school degree or more
+            T150_008:      Doctorate degree
+
+
+
+
+
+ 
+ 
+ 
+--------------------------------------------------------------------------------
+Data Dictionary
+--------------------------------------------------------------------------------
+ 
+Variables 
+      FIPS:           FIPS
+      GEOID:          Geographic Identifier
+      NAME:           Name of Area
+      QName:          Qualifying Name
+      STUSAB:         State/U.S.-Abbreviation (USPS)
+      SUMLEV:         Summary Level
+      GEOCOMP:        Geographic Component
+      FILEID:         File Identification
+      LOGRECNO:       Logical Record Number
+      US:             US
+      REGION:         Region
+      DIVISION:       Division
+      STATECE:        State (Census Code)
+      STATE:          State (FIPS)
+      COUNTY:         County
+      COUSUB:         County Subdivision (FIPS)
+      PLACE:          Place (FIPS Code)
+      PLACESE:        Place (State FIPS + Place FIPS)
+      TRACT:          Census Tract
+      BLKGRP:         Block Group
+      CONCIT:         Consolidated City
+      AIANHH:         American Indian Area/Alaska Native Area/Hawaiian Home Land (Census)
+      AIANHHFP:       American Indian Area/Alaska Native Area/Hawaiian Home Land (FIPS)
+      AIHHTLI:        American Indian Trust Land/Hawaiian Home Land Indicator
+      AITSCE:         American Indian Tribal Subdivision (Census)
+      AITS:           American Indian Tribal Subdivision (FIPS)
+      ANRC:           Alaska Native Regional Corporation (FIPS)
+      CBSA:           Metropolitan and Micropolitan Statistical Area
+      CSA:            Combined Statistical Area
+      METDIV:         Metropolitan Division
+      MACC:           Metropolitan Area Central City
+      MEMI:           Metropolitan/Micropolitan Indicator Flag
+      NECTA:          New England City and Town Combined Statistical Area
+      CNECTA:         New England City and Town Area
+      NECTADIV:       New England City and Town Area Division
+      UA:             Urban Area
+      UACP:           Urban Area Central Place
+      CDCURR:         Current Congressional District ***
+      SLDU:           State Legislative District Upper
+      SLDL:           State Legislative District Lower
+      VTD:            Voting District
+      ZCTA3:          ZIP Code Tabulation Area (3-digit)
+      ZCTA5:          ZIP Code Tabulation Area (5-digit)
+      SUBMCD:         Subbarrio (FIPS)
+      SDELM:          School District (Elementary)
+      SDSEC:          School District (Secondary)
+      SDUNI:          School District (Unified)
+      UR:             Urban/Rural
+      PCI:            Principal City Indicator
+      TAZ:            Traffic Analysis Zone
+      UGA:            Urban Growth Area
+      PUMA5:          Public Use Microdata Area - 5% File
+      PUMA1:          Public Use Microdata Area - 1% File
+      T025_001:       Population 25 Years and over:
+      T025_002:       Population 25 Years and over: Less Than High School
+      T025_003:       Population 25 Years and over: High School Graduate (includes equivalency)
+      T025_004:       Population 25 Years and over: Some college
+      T025_005:       Population 25 Years and over: Bachelor's degree
+      T025_006:       Population 25 Years and over: Master's degree
+      T025_007:       Population 25 Years and over: Professional school degree
+      T025_008:       Population 25 Years and over: Doctorate degree
+      T150_001:       Population 25 Years and over:
+      T150_002:       Population 25 Years and over: Less Than High School
+      T150_003:       Population 25 Years and over: High School Graduate or more (includes equivalency)
+      T150_004:       Population 25 Years and over: Some college or more
+      T150_005:       Population 25 Years and over: Bachelor's degree or more
+      T150_006:       Population 25 Years and over: Master's degree or more
+      T150_007:       Population 25 Years and over: Professional school degree or more
+      T150_008:       Population 25 Years and over: Doctorate degree
+
+
+
+
+--------------------------------------------------------------------------------
+Citation and Use of Data
+--------------------------------------------------------------------------------
+ 
+All persons are granted a limited license to use this documentation and the
+accompanying data, subject to the following conditions:
+
+* Publications and research reports employing the data
+  must cite it appropriately. The citation should include the following:
+
+	  www.socialexplorer.com
+	  New York City, NY: Social Explorer 2015
+
+
+* Citations should also include the URL for this report:
+
+    http://www.socialexplorer.com/pub/reportdata/HtmlResults.aspx?reportid=R11060028
+
+If you have any questions contact info@socialexplorer.com
