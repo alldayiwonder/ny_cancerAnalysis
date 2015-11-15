@@ -86,7 +86,8 @@ def main_CensusTract():
 			# columns = ['Cancer', 'Coefficient', 'p-Value', 'Std. Error', 'Adj. R']
 			# result_df = pd.DataFrame(index=columns)
 			for cancer in cancer_list:
-				mod = smf.ols(formula=cancer+' ~ '+chemical+' + pctSmoking + pctElderly + income + higherEd + unemploy', data = data_merged).fit()
+				mod = smf.ols(formula=cancer+' ~ '+chemical+' + \
+					pctSmoking + pctElderly + income + higherEd + unemploy', data = data_merged).fit(cov_type='HC0')
 				 
 				result_df = pd.DataFrame({
 					'Cancer': cancer,
@@ -101,7 +102,10 @@ def main_CensusTract():
 
 				result_df.to_csv(f)
 
-
+	# Test model
+	mod = smf.ols(formula='observed_Total_Per100k + n_5_1_fugitive_air_benzene + \
+	pctSmoking + pctElderly + income + higherEd + unemploy', data = data_merged).fit(cov_type='HC0')
+	print mod.summary()
 	# Correlation Table Heat Map
 	#hm(correlation_table)
 
