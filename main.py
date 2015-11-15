@@ -79,7 +79,8 @@ def main_CensusTract():
 	'n_5_2_stack_air_benzene', 'benzeneTotal', 'n_5_1_fugitive_air_toluene', 'n_5_2_stack_air_toluene', 
 	'tolueneTotal', 'n_5_1_fugitive_air_ethylbenzene', 'n_5_2_stack_air_ethylbenzene', 'ethylbenzeneTotal',
 	'n_5_1_fugitive_air_xylene', 'n_5_2_stack_air_xylene', 'xyleneTotal', 'n_5_1_fugitive_air_formaldehyde',
-	'n_5_2_stack_air_formaldehyde', 'formaldehydeTotal', 'BTEX_fugitive', 'BTEX_stack', 'BTEX_total']
+	'n_5_2_stack_air_formaldehyde', 'formaldehydeTotal', 'BTEX_fugitive', 'BTEX_stack', 'BTEX_total', 
+	'n_5_1_fugitive_air_dioxin', 'n_5_2_stack_air_dioxin', 'dioxinTotal']
 
 	for chemical in chemical_list:
 		with open('data/Regression/'+chemical+'.csv', 'w') as f:
@@ -105,7 +106,7 @@ def main_CensusTract():
 				result_df.to_csv(f)
 
 	# Test model
-	mod = smf.ols(formula='observed_Total_Per100k ~ airTotal + \
+	mod = smf.ols(formula='observed_Total_Per100k ~ dioxinTotal + \
 	pctSmoking + pctElderly + income + higherEd + unemploy', data = data_merged).fit(cov_type='HC0')
 	print mod.summary()
 	# Correlation Table Heat Map

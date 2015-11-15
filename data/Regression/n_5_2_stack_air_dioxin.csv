@@ -1,0 +1,200 @@
+,Adj. R,Cancer,Coefficient,Std. Error,p-Value
+Intercept,0.255,observed_Bladder_Per100k,-77.1,10,0.0
+n_5_2_stack_air_dioxin,0.255,observed_Bladder_Per100k,1.34,10,0.895
+pctSmoking,0.255,observed_Bladder_Per100k,5.18,0,0.0
+pctElderly,0.255,observed_Bladder_Per100k,752.3,41,0.0
+income,0.255,observed_Bladder_Per100k,0.0,0,0.0
+higherEd,0.255,observed_Bladder_Per100k,4.05,17,0.814
+unemploy,0.255,observed_Bladder_Per100k,-266.42,51,0.0
+,Adj. R,Cancer,Coefficient,Std. Error,p-Value
+Intercept,0.003,observed_Bone_Per100k,2.68,1,0.161
+n_5_2_stack_air_dioxin,0.003,observed_Bone_Per100k,-0.08,1,0.941
+pctSmoking,0.003,observed_Bone_Per100k,-0.01,0,0.817
+pctElderly,0.003,observed_Bone_Per100k,15.38,8,0.073
+income,0.003,observed_Bone_Per100k,0.0,0,0.355
+higherEd,0.003,observed_Bone_Per100k,-1.04,1,0.585
+unemploy,0.003,observed_Bone_Per100k,5.04,8,0.576
+,Adj. R,Cancer,Coefficient,Std. Error,p-Value
+Intercept,0.06,observed_Brain_Per100k,-4.9,3,0.187
+n_5_2_stack_air_dioxin,0.06,observed_Brain_Per100k,-3.21,2,0.217
+pctSmoking,0.06,observed_Brain_Per100k,0.97,0,0.0
+pctElderly,0.06,observed_Brain_Per100k,123.85,15,0.0
+income,0.06,observed_Brain_Per100k,0.0,0,0.025
+higherEd,0.06,observed_Brain_Per100k,10.56,7,0.133
+unemploy,0.06,observed_Brain_Per100k,-58.21,18,0.001
+,Adj. R,Cancer,Coefficient,Std. Error,p-Value
+Intercept,0.279,observed_Breast_Per100k,-33.94,18,0.07
+n_5_2_stack_air_dioxin,0.279,observed_Breast_Per100k,-7.81,19,0.69
+pctSmoking,0.279,observed_Breast_Per100k,4.47,1,0.0
+pctElderly,0.279,observed_Breast_Per100k,1309.2,55,0.0
+income,0.279,observed_Breast_Per100k,0.0,0,0.0
+higherEd,0.279,observed_Breast_Per100k,152.38,32,0.0
+unemploy,0.279,observed_Breast_Per100k,-238.83,86,0.006
+,Adj. R,Cancer,Coefficient,Std. Error,p-Value
+Intercept,0.208,observed_Colorectal_Per100k,75.79,17,0.0
+n_5_2_stack_air_dioxin,0.208,observed_Colorectal_Per100k,2.66,13,0.843
+pctSmoking,0.208,observed_Colorectal_Per100k,2.17,1,0.045
+pctElderly,0.208,observed_Colorectal_Per100k,1274.61,52,0.0
+income,0.208,observed_Colorectal_Per100k,0.0,0,0.561
+higherEd,0.208,observed_Colorectal_Per100k,-49.81,29,0.092
+unemploy,0.208,observed_Colorectal_Per100k,-148.58,93,0.113
+,Adj. R,Cancer,Coefficient,Std. Error,p-Value
+Intercept,0.082,observed_Esophagus_Per100k,-9.72,3,0.012
+n_5_2_stack_air_dioxin,0.082,observed_Esophagus_Per100k,0.19,3,0.959
+pctSmoking,0.082,observed_Esophagus_Per100k,1.07,0,0.0
+pctElderly,0.082,observed_Esophagus_Per100k,132.45,13,0.0
+income,0.082,observed_Esophagus_Per100k,0.0,0,0.343
+higherEd,0.082,observed_Esophagus_Per100k,-0.51,4,0.904
+unemploy,0.082,observed_Esophagus_Per100k,-7.85,14,0.596
+,Adj. R,Cancer,Coefficient,Std. Error,p-Value
+Intercept,0.103,observed_Kidney_Per100k,14.37,7,0.046
+n_5_2_stack_air_dioxin,0.103,observed_Kidney_Per100k,11.62,6,0.087
+pctSmoking,0.103,observed_Kidney_Per100k,1.38,0,0.0
+pctElderly,0.103,observed_Kidney_Per100k,323.95,31,0.0
+income,0.103,observed_Kidney_Per100k,0.0,0,0.001
+higherEd,0.103,observed_Kidney_Per100k,-5.12,10,0.637
+unemploy,0.103,observed_Kidney_Per100k,-107.21,30,0.0
+,Adj. R,Cancer,Coefficient,Std. Error,p-Value
+Intercept,0.042,observed_Larynx_Per100k,2.69,3,0.392
+n_5_2_stack_air_dioxin,0.042,observed_Larynx_Per100k,-3.59,1,0.072
+pctSmoking,0.042,observed_Larynx_Per100k,0.82,0,0.0
+pctElderly,0.042,observed_Larynx_Per100k,75.46,10,0.0
+income,0.042,observed_Larynx_Per100k,-0.0,0,0.181
+higherEd,0.042,observed_Larynx_Per100k,-9.49,5,0.062
+unemploy,0.042,observed_Larynx_Per100k,13.73,14,0.36
+,Adj. R,Cancer,Coefficient,Std. Error,p-Value
+Intercept,0.175,observed_Leukemia_Per100k,-15.73,5,0.008
+n_5_2_stack_air_dioxin,0.175,observed_Leukemia_Per100k,4.81,7,0.503
+pctSmoking,0.175,observed_Leukemia_Per100k,1.65,0,0.0
+pctElderly,0.175,observed_Leukemia_Per100k,352.83,19,0.0
+income,0.175,observed_Leukemia_Per100k,0.0,0,0.0
+higherEd,0.175,observed_Leukemia_Per100k,4.71,8,0.56
+unemploy,0.175,observed_Leukemia_Per100k,-85.07,23,0.0
+,Adj. R,Cancer,Coefficient,Std. Error,p-Value
+Intercept,0.042,observed_Liver_Per100k,70.04,5,0.0
+n_5_2_stack_air_dioxin,0.042,observed_Liver_Per100k,-7.56,2,0.012
+pctSmoking,0.042,observed_Liver_Per100k,-1.32,0,0.0
+pctElderly,0.042,observed_Liver_Per100k,96.54,19,0.0
+income,0.042,observed_Liver_Per100k,-0.0,0,0.0
+higherEd,0.042,observed_Liver_Per100k,-15.37,7,0.03
+unemploy,0.042,observed_Liver_Per100k,21.57,25,0.392
+,Adj. R,Cancer,Coefficient,Std. Error,p-Value
+Intercept,0.229,observed_Lung_Per100k,-83.81,20,0.0
+n_5_2_stack_air_dioxin,0.229,observed_Lung_Per100k,25.24,15,0.101
+pctSmoking,0.229,observed_Lung_Per100k,13.76,1,0.0
+pctElderly,0.229,observed_Lung_Per100k,1644.32,68,0.0
+income,0.229,observed_Lung_Per100k,0.0,0,0.002
+higherEd,0.229,observed_Lung_Per100k,-80.82,40,0.048
+unemploy,0.229,observed_Lung_Per100k,-219.64,112,0.051
+,Adj. R,Cancer,Coefficient,Std. Error,p-Value
+Intercept,0.032,observed_Mesothelioma_Per100k,-8.51,2,0.001
+n_5_2_stack_air_dioxin,0.032,observed_Mesothelioma_Per100k,-0.96,1,0.522
+pctSmoking,0.032,observed_Mesothelioma_Per100k,0.37,0,0.0
+pctElderly,0.032,observed_Mesothelioma_Per100k,35.91,9,0.0
+income,0.032,observed_Mesothelioma_Per100k,0.0,0,0.0
+higherEd,0.032,observed_Mesothelioma_Per100k,-1.37,2,0.548
+unemploy,0.032,observed_Mesothelioma_Per100k,0.76,10,0.943
+,Adj. R,Cancer,Coefficient,Std. Error,p-Value
+Intercept,0.215,observed_NHL_Per100k,-13.53,7,0.075
+n_5_2_stack_air_dioxin,0.215,observed_NHL_Per100k,13.57,14,0.362
+pctSmoking,0.215,observed_NHL_Per100k,1.46,0,0.0
+pctElderly,0.215,observed_NHL_Per100k,498.08,25,0.0
+income,0.215,observed_NHL_Per100k,0.0,0,0.0
+higherEd,0.215,observed_NHL_Per100k,38.28,11,0.001
+unemploy,0.215,observed_NHL_Per100k,-114.89,30,0.0
+,Adj. R,Cancer,Coefficient,Std. Error,p-Value
+Intercept,0.009,observed_Nasal_Per100k,0.15,1,0.904
+n_5_2_stack_air_dioxin,0.009,observed_Nasal_Per100k,0.39,1,0.751
+pctSmoking,0.009,observed_Nasal_Per100k,0.19,0,0.013
+pctElderly,0.009,observed_Nasal_Per100k,11.5,3,0.001
+income,0.009,observed_Nasal_Per100k,0.0,0,0.764
+higherEd,0.009,observed_Nasal_Per100k,-1.54,1,0.437
+unemploy,0.009,observed_Nasal_Per100k,-10.12,5,0.058
+,Adj. R,Cancer,Coefficient,Std. Error,p-Value
+Intercept,0.066,observed_Oral_Per100k,1.89,5,0.721
+n_5_2_stack_air_dioxin,0.066,observed_Oral_Per100k,5.77,7,0.431
+pctSmoking,0.066,observed_Oral_Per100k,1.42,0,0.0
+pctElderly,0.066,observed_Oral_Per100k,165.0,15,0.0
+income,0.066,observed_Oral_Per100k,0.0,0,0.003
+higherEd,0.066,observed_Oral_Per100k,-3.28,6,0.627
+unemploy,0.066,observed_Oral_Per100k,-12.17,19,0.539
+,Adj. R,Cancer,Coefficient,Std. Error,p-Value
+Intercept,0.316,observed_Other_Per100k,-151.26,20,0.0
+n_5_2_stack_air_dioxin,0.316,observed_Other_Per100k,-3.18,9,0.739
+pctSmoking,0.316,observed_Other_Per100k,7.48,1,0.0
+pctElderly,0.316,observed_Other_Per100k,1829.44,98,0.0
+income,0.316,observed_Other_Per100k,0.0,0,0.0
+higherEd,0.316,observed_Other_Per100k,138.73,32,0.0
+unemploy,0.316,observed_Other_Per100k,-36.45,98,0.713
+,Adj. R,Cancer,Coefficient,Std. Error,p-Value
+Intercept,0.084,observed_Ovary_Per100k,5.09,4,0.236
+n_5_2_stack_air_dioxin,0.084,observed_Ovary_Per100k,6.74,3,0.057
+pctSmoking,0.084,observed_Ovary_Per100k,0.24,0,0.161
+pctElderly,0.084,observed_Ovary_Per100k,160.17,11,0.0
+income,0.084,observed_Ovary_Per100k,0.0,0,0.107
+higherEd,0.084,observed_Ovary_Per100k,11.73,5,0.04
+unemploy,0.084,observed_Ovary_Per100k,-37.56,14,0.012
+,Adj. R,Cancer,Coefficient,Std. Error,p-Value
+Intercept,0.177,observed_Pancreas_Per100k,-20.73,7,0.009
+n_5_2_stack_air_dioxin,0.177,observed_Pancreas_Per100k,-5.3,4,0.22
+pctSmoking,0.177,observed_Pancreas_Per100k,0.8,0,0.026
+pctElderly,0.177,observed_Pancreas_Per100k,485.53,42,0.0
+income,0.177,observed_Pancreas_Per100k,0.0,0,0.0
+higherEd,0.177,observed_Pancreas_Per100k,-0.09,9,0.992
+unemploy,0.177,observed_Pancreas_Per100k,8.51,41,0.836
+,Adj. R,Cancer,Coefficient,Std. Error,p-Value
+Intercept,0.199,observed_Prostate_Per100k,-60.42,22,0.008
+n_5_2_stack_air_dioxin,0.199,observed_Prostate_Per100k,8.33,17,0.634
+pctSmoking,0.199,observed_Prostate_Per100k,7.39,1,0.0
+pctElderly,0.199,observed_Prostate_Per100k,1244.41,92,0.0
+income,0.199,observed_Prostate_Per100k,0.0,0,0.0
+higherEd,0.199,observed_Prostate_Per100k,115.56,35,0.001
+unemploy,0.199,observed_Prostate_Per100k,21.0,98,0.831
+,Adj. R,Cancer,Coefficient,Std. Error,p-Value
+Intercept,0.024,observed_Soft_Tissue_Per100k,8.26,2,0.002
+n_5_2_stack_air_dioxin,0.024,observed_Soft_Tissue_Per100k,-1.93,1,0.33
+pctSmoking,0.024,observed_Soft_Tissue_Per100k,-0.09,0,0.458
+pctElderly,0.024,observed_Soft_Tissue_Per100k,59.26,8,0.0
+income,0.024,observed_Soft_Tissue_Per100k,0.0,0,0.257
+higherEd,0.024,observed_Soft_Tissue_Per100k,2.4,4,0.582
+unemploy,0.024,observed_Soft_Tissue_Per100k,-12.54,10,0.253
+,Adj. R,Cancer,Coefficient,Std. Error,p-Value
+Intercept,0.081,observed_Stomach_Per100k,67.31,7,0.0
+n_5_2_stack_air_dioxin,0.081,observed_Stomach_Per100k,-1.42,5,0.782
+pctSmoking,0.081,observed_Stomach_Per100k,-1.65,0,0.0
+pctElderly,0.081,observed_Stomach_Per100k,187.96,20,0.0
+income,0.081,observed_Stomach_Per100k,-0.0,0,0.0
+higherEd,0.081,observed_Stomach_Per100k,-17.47,6,0.012
+unemploy,0.081,observed_Stomach_Per100k,31.24,35,0.373
+,Adj. R,Cancer,Coefficient,Std. Error,p-Value
+Intercept,0.036,observed_Testis_Per100k,-4.25,2,0.107
+n_5_2_stack_air_dioxin,0.036,observed_Testis_Per100k,-2.15,2,0.316
+pctSmoking,0.036,observed_Testis_Per100k,0.36,0,0.0
+pctElderly,0.036,observed_Testis_Per100k,25.24,10,0.012
+income,0.036,observed_Testis_Per100k,0.0,0,0.001
+higherEd,0.036,observed_Testis_Per100k,10.15,2,0.001
+unemploy,0.036,observed_Testis_Per100k,-17.64,10,0.109
+,Adj. R,Cancer,Coefficient,Std. Error,p-Value
+Intercept,0.118,observed_Thyroid_Per100k,35.84,7,0.0
+n_5_2_stack_air_dioxin,0.118,observed_Thyroid_Per100k,-10.77,6,0.098
+pctSmoking,0.118,observed_Thyroid_Per100k,-0.16,0,0.559
+pctElderly,0.118,observed_Thyroid_Per100k,166.43,21,0.0
+income,0.118,observed_Thyroid_Per100k,0.0,0,0.0
+higherEd,0.118,observed_Thyroid_Per100k,19.67,9,0.041
+unemploy,0.118,observed_Thyroid_Per100k,-162.27,32,0.0
+,Adj. R,Cancer,Coefficient,Std. Error,p-Value
+Intercept,0.108,observed_Uterus_Per100k,25.3,7,0.001
+n_5_2_stack_air_dioxin,0.108,observed_Uterus_Per100k,2.58,6,0.694
+pctSmoking,0.108,observed_Uterus_Per100k,0.19,0,0.519
+pctElderly,0.108,observed_Uterus_Per100k,348.93,36,0.0
+income,0.108,observed_Uterus_Per100k,0.0,0,0.125
+higherEd,0.108,observed_Uterus_Per100k,15.42,9,0.089
+unemploy,0.108,observed_Uterus_Per100k,-33.84,26,0.195
+,Adj. R,Cancer,Coefficient,Std. Error,p-Value
+Intercept,0.336,observed_Total_Per100k,-174.49,94,0.064
+n_5_2_stack_air_dioxin,0.336,observed_Total_Per100k,35.27,81,0.667
+pctSmoking,0.336,observed_Total_Per100k,48.14,8,0.0
+pctElderly,0.336,observed_Total_Per100k,11318.74,392,0.0
+income,0.336,observed_Total_Per100k,0.01,0,0.0
+higherEd,0.336,observed_Total_Per100k,337.73,220,0.126
+unemploy,0.336,observed_Total_Per100k,-1467.43,525,0.005

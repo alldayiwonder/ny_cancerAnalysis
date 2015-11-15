@@ -99,6 +99,12 @@ def read_airEmissions_CensusTract():
 	airEmissions_formaldehyde = airEmissions_formaldehyde.rename(columns={'n_5_1_fugitive_air': 'n_5_1_fugitive_air_formaldehyde', 'n_5_2_stack_air': 'n_5_2_stack_air_formaldehyde'})
 	print 'Census tracts with facilities reporting formaldehyde emissions:', len(airEmissions_formaldehyde)
 
+	# Dioxin emissions per census tract
+	airEmissions_dioxin = airEmissions_allchemicals[airEmissions_allchemicals['chemical'] == 'DIOXIN AND DIOXIN-LIKE COMPOUNDS']
+	airEmissions_dioxin = airEmissions_dioxin.rename(columns={'n_5_1_fugitive_air': 'n_5_1_fugitive_air_dioxin', 'n_5_2_stack_air': 'n_5_2_stack_air_dioxin'})
+	print 'Census tracts with facilities reporting dioxin emissions:', len(airEmissions_dioxin)
+	
+
 	# Merge the aggregation of each specific chemical with the total emissions for the main file
 	airEmissions_total['airTotal'] = airEmissions_total['n_5_2_stack_air'] + airEmissions_total['n_5_1_fugitive_air'] 
 
@@ -127,7 +133,11 @@ def read_airEmissions_CensusTract():
 	data_merged_formaldehyde['BTEX_stack'] = data_merged_formaldehyde['n_5_2_stack_air_benzene'] + data_merged_formaldehyde['n_5_2_stack_air_toluene'] + data_merged_formaldehyde['n_5_2_stack_air_ethylbenzene'] + data_merged_formaldehyde['n_5_2_stack_air_xylene'] 
 	data_merged_formaldehyde['BTEX_total'] = data_merged_formaldehyde['BTEX_fugitive'] + data_merged_formaldehyde['BTEX_stack']
 	
-	return data_merged_formaldehyde  
+	data_merged_dioxin = pd.merge(data_merged_formaldehyde, airEmissions_dioxin, how='outer')
+	data_merged_dioxin = data_merged_dioxin.drop('chemical', 1)
+	data_merged_dioxin['dioxinTotal'] = data_merged_dioxin['n_5_1_fugitive_air_dioxin'] + data_merged_dioxin['n_5_2_stack_air_dioxin'] 
+
+	return data_merged_dioxin 
 
 #read_airEmissions_County()
 #read_airEmissions_CensusTract()
