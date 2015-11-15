@@ -14,10 +14,10 @@ def main_County():
 	airEmissions = read_airEmissions_County()
 
 	# Import smoking data
-	smoking = readSmoking()  # PRODUCING A WARNING
+	smoking = readSmoking()   
 
 	# Import cancer data
-	allCancer = mergeCancer_County()  # NEED TO NORMALIZE COUNTS WITH POPULATION VALUE
+	allCancer = mergeCancer_County() 
 
 	# Import county level population data
 	# acsCounty = popData('county')
@@ -47,11 +47,11 @@ def main_CensusTract():
 	airEmissions = read_airEmissions_CensusTract()
 
 	# Import cancer data
-	# allCancer = readIndivCancer_CensusTract()  # NEED TO NORMALIZE COUNTS WITH POPULATION VALUE
+	# allCancer = readIndivCancer_CensusTract()  
 	allCancer = mergeCancer_Tract()
 
 	# Import smoking data
-	smoking = readSmoking()  # PRODUCING A WARNING
+	smoking = readSmoking()   
 
 	# Import census tract level population data
 	acsTract = popData('tract')
@@ -63,7 +63,7 @@ def main_CensusTract():
 	data_merged['countyCode'] = data_merged['tractFIPS'].str[:3]
 	data_merged = pd.merge(data_merged, smoking, left_on = 'countyCode', right_on = 'cCode')
 	data_merged = pd.merge(data_merged, acsTract, left_on = 'geoid11', right_on = 'Geo_FIPS')
-
+	data_merged.to_csv('test.csv')
 	correlation_table = data_merged.corr()
 	correlation_table.to_csv('data/CorrelationTable/censusTract_correlationTable.csv')
 

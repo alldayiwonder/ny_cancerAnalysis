@@ -46,11 +46,10 @@ def read_airEmissions_CensusTract():
 
 	# Import the output from readFIPS function addGEOID_TRI. TRI file contains 2097 records.
 	airEmissions = pd.read_csv('data/EPA_TRI/toxic-release-inventory.ny.2000.geoid.csv', index_col=0, dtype={'geoid': str})
-
+	
 	# Trim dataframe and groupby census tract and aggregate fugitive and stack air emissions 
 	airEmissions_trim = airEmissions[['geoid','tri_facility_id','facility_name','county', 'n_5_1_fugitive_air','n_5_2_stack_air', 'chemical']]
 	airEmissions_trim['geoid'] = airEmissions_trim['geoid'].str.slice(0,11)  # Make sure geoid does not include block
-	#print airEmissions_trim
 
 	# Get count of number of reporting facilities, result is 638 facilities
 	airEmissions_facilityCount = airEmissions_trim.groupby(['tri_facility_id'], as_index=False).aggregate(np.sum)
@@ -122,8 +121,8 @@ def read_airEmissions_CensusTract():
 	data_merged_formaldehyde['BTEX_fugitive'] = data_merged_formaldehyde['n_5_1_fugitive_air_benzene'] + data_merged_formaldehyde['n_5_1_fugitive_air_toluene'] + data_merged_formaldehyde['n_5_1_fugitive_air_ethylbenzene'] + data_merged_formaldehyde['n_5_1_fugitive_air_xylene'] 
 	data_merged_formaldehyde['BTEX_stack'] = data_merged_formaldehyde['n_5_2_stack_air_benzene'] + data_merged_formaldehyde['n_5_2_stack_air_toluene'] + data_merged_formaldehyde['n_5_2_stack_air_ethylbenzene'] + data_merged_formaldehyde['n_5_2_stack_air_xylene'] 
 	data_merged_formaldehyde['BTEX_total'] = data_merged_formaldehyde['BTEX_fugitive'] + data_merged_formaldehyde['BTEX_stack']
-
-	return data_merged_formaldehyde  #Need to change to formaldehyde, but fix error first
+	
+	return data_merged_formaldehyde  
 
 #read_airEmissions_County()
 #read_airEmissions_CensusTract()
