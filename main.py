@@ -64,45 +64,42 @@ def main_CensusTract():
 	data_merged = pd.merge(data_merged, smoking, left_on = 'countyCode', right_on = 'cCode')
 	data_merged = pd.merge(data_merged, acsTract, left_on = 'geoid11', right_on = 'Geo_FIPS')
 
-	print 
-	print '============= Total Cancer Incidence vs Total Air Emissions at Census Tract Level ============='
-	print 
 	correlation_table = data_merged.corr()
 	correlation_table.to_csv('data/CorrelationTable/censusTract_correlationTable.csv')
-	mod = smf.ols(formula='observed_Total_Per100k ~ airTotal + pctSmoking + pctElderly + income + higherEd + unemploy', data = data_merged).fit()
-	print(mod.summary())
-	print 
-	print '============= Leukemia Incidence vs Fugitive Xylene Emissions at Census Tract Level ============='
-	print 
-	mod = smf.ols(formula='observed_Leukemia_Per100k ~ n_5_1_fugitive_air_benzene + pctSmoking + pctElderly + income + higherEd + unemploy', data = data_merged).fit()
-	print(mod.summary())
-	print
-	print '============= Bladder Incidence vs Fugitive Toluene Emissions at Census Tract Level ============='
-	print 
-	mod = smf.ols(formula='observed_Bladder_Per100k ~ n_5_1_fugitive_air_toluene + pctSmoking + pctElderly + income + higherEd + unemploy', data = data_merged).fit()
-	print(mod.summary())
-	print
-	print '============= Oral Incidence vs Fugitive Benzene Emissions at Census Tract Level ============='
-	print 
-	mod = smf.ols(formula='observed_Oral_Per100k ~ n_5_1_fugitive_air_benzene + pctSmoking + pctElderly + income + higherEd + unemploy', data = data_merged).fit()
-	print(mod.summary())
-	print
-	print '============= Lung Incidence vs Total Ethylbenzene Emissions at Census Tract Level ============='
-	print 
-	mod = smf.ols(formula='observed_Lung_Per100k ~ ethylbenzeneTotal + \
-		pctSmoking + pctElderly + income + higherEd + unemploy', data = data_merged).fit()
-	print(mod.summary())
-	print
-	print '============= Lung Incidence vs BTEX Emissions at Census Tract Level ============='
-	print 
-	mod = smf.ols(formula='observed_Lung_Per100k ~ BTEX_stack + \
-		pctSmoking + pctElderly + income + higherEd + unemploy', data = data_merged).fit()
-	print(mod.summary())
 
-	# print 
-	# print '============= Correlation Table Heatmap ============='
-	# print 
-	# hm(correlation_table)
+	cancer_list = ['observed_Bladder_Per100k', 'observed_Bone_Per100k',	'observed_Brain_Per100k', 
+	'observed_Breast_Per100k', 'observed_Colorectal_Per100k','observed_Esophagus_Per100k', 'observed_Kidney_Per100k', 
+	'observed_Larynx_Per100k', 'observed_Leukemia_Per100k',	'observed_Liver_Per100k', 'observed_Lung_Per100k',	
+	'observed_Mesothelioma_Per100k', 'observed_NHL_Per100k', 'observed_Nasal_Per100k', 'observed_Oral_Per100k',	
+	'observed_Other_Per100k', 'observed_Ovary_Per100k',	'observed_Pancreas_Per100k', 'observed_Prostate_Per100k',	
+	'observed_Soft_Tissue_Per100k',	'observed_Stomach_Per100k',	'observed_Testis_Per100k', 'observed_Thyroid_Per100k',	
+	'observed_Uterus_Per100k', 'observed_Total_Per100k']
+
+	chemical_list = ['n_5_1_fugitive_air', 'n_5_2_stack_air', 'airTotal', 'n_5_1_fugitive_air_benzene',
+	'n_5_2_stack_air_benzene', 'benzeneTotal', 'n_5_1_fugitive_air_toluene', 'n_5_2_stack_air_toluene', 
+	'tolueneTotal', 'n_5_1_fugitive_air_ethylbenzene', 'n_5_2_stack_air_ethylbenzene', 'ethylbenzeneTotal',
+	'n_5_1_fugitive_air_xylene', 'n_5_2_stack_air_xylene', 'xyleneTotal', 'n_5_1_fugitive_air_formaldehyde',
+	'n_5_2_stack_air_formaldehyde', 'formaldehydeTotal', 'BTEX_fugitive', 'BTEX_stack', 'BTEX_total']
+
+	for chemical in chemical_list:
+		with open('data/Regression/'+chemical+'.csv', 'w') as f:
+			# columns = ['Cancer', 'Coefficient', 'p-Value', 'Std. Error', 'Adj. R']
+			# result_df = pd.DataFrame(index=columns)
+			for cancer in cancer_list:
+				mod = smf.ols(formula=cancer+' ~ '+chemical+' + pctSmoking + pctElderly + income + higherEd + unemploy', data = data_merged).fit()
+				
+				result_df = pd.DataFrame({
+					'Cancer': cancer,
+					'Coefficient': mod.params.astype(int),
+		            'p-Value': mod.pvalues.apply(lambda x: round(x, 3)),
+		            'Std. Error': mod.bse.astype(int),
+		            'Adj. R': round(mod.rsquared_adj, 3)})
+
+				result_df.to_csv(f)
+
+
+	# Correlation Table Heat Map
+	#hm(correlation_table)
 
 main_CensusTract()
 
