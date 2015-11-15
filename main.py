@@ -97,13 +97,15 @@ def main_CensusTract():
 		            'Adj. R': round(mod.rsquared_adj, 3)})
 
 				# Coefficient for air emission feature is mod.params[1]
+				
 				if mod.params[1] > 1.0:
+					print 'Cancer and pollutant combination with Coefficient > 1:'
 					print mod.params[1], mod.pvalues[1], cancer, chemical  
 
 				result_df.to_csv(f)
 
 	# Test model
-	mod = smf.ols(formula='observed_Total_Per100k + n_5_1_fugitive_air_benzene + \
+	mod = smf.ols(formula='observed_Total_Per100k ~ airTotal + \
 	pctSmoking + pctElderly + income + higherEd + unemploy', data = data_merged).fit(cov_type='HC0')
 	print mod.summary()
 	# Correlation Table Heat Map

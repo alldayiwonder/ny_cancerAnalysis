@@ -54,7 +54,12 @@ def read_airEmissions_CensusTract():
 	# Get count of number of reporting facilities, result is 638 facilities
 	airEmissions_facilityCount = airEmissions_trim.groupby(['tri_facility_id'], as_index=False).aggregate(np.sum)
 	print 'Reporting facilities:', len(airEmissions_facilityCount)
-
+	airEmissions_chemicalCount = airEmissions_trim.groupby(['chemical'], as_index=False)
+	print 'Reported chemicals:', len(airEmissions_chemicalCount.groups)
+	print 'Facilties reporting benzene', len(airEmissions_chemicalCount.get_group('BENZENE'))
+	print 'Facilties reporting toluene', len(airEmissions_chemicalCount.get_group('TOLUENE'))
+	print 'Facilties reporting ethylbenzene', len(airEmissions_chemicalCount.get_group('ETHYLBENZENE'))
+	print 'Facilties reporting formaldehyde', len(airEmissions_chemicalCount.get_group('FORMALDEHYDE'))
 	# Total emissions per census tract, total of 498 tracts with reporting facilities
 	# This aggregation does not take into account the toxicity of individual chemicals
 	airEmissions_total = airEmissions_trim.groupby(['geoid'], as_index=False).aggregate(np.sum)
