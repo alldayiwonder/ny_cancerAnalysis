@@ -3,6 +3,7 @@ from read_airEmissions import read_airEmissions_CensusTract
 from readAllCancer import mergeCancer_Tract, mergeCancer_County
 from readSmoking import readSmoking
 from readACS import popData
+from readCancerRisk import read_cancerRisk_CensusTract
 from corrHeatMap import hm
 import pandas as pd 
 import statsmodels.formula.api as smf
@@ -56,6 +57,9 @@ def main_CensusTract():
 	# Import census tract level population data
 	acsTract = popData('tract')
 
+	# Import cancer risk data
+	cancerRisk = read_cancerRisk_CensusTract()
+
 	# Join air emission data with cancer rates data
 	data_merged = pd.merge(allCancer, airEmissions, how='left', left_on = 'geoid11', right_on = 'geoid')
 	data_merged.fillna(0, inplace=True)  # To avoid losing those tracts in model with smoking and demographic data but no chemical releases 
@@ -63,7 +67,9 @@ def main_CensusTract():
 	data_merged['countyCode'] = data_merged['tractFIPS'].str[:3]
 	data_merged = pd.merge(data_merged, smoking, left_on = 'countyCode', right_on = 'cCode')
 	data_merged = pd.merge(data_merged, acsTract, left_on = 'geoid11', right_on = 'Geo_FIPS')
-	data_merged.to_csv('test.csv')
+	data_merged = pd.merge(data_merged, cancerRisk, left_on = 'Geo_FIPS', right_on = 'GEOID')
+
+	# Produce correlation table
 	correlation_table = data_merged.corr()
 	correlation_table.to_csv('data/CorrelationTable/censusTract_correlationTable.csv')
 
@@ -92,7 +98,7 @@ def main_CensusTract():
 				 
 				result_df = pd.DataFrame({
 					'Cancer': cancer,
-					'Coefficient': mod.params.apply(lambda x: round(x, 2)),
+					'Coefficient': mod.params.apply(lambda x: round(x, 3)),
 		            'p-Value': mod.pvalues.apply(lambda x: round(x, 3)),
 		            'Std. Error': mod.bse.astype(int),
 		            'Adj. R': round(mod.rsquared_adj, 3)})
@@ -106,7 +112,7 @@ def main_CensusTract():
 				result_df.to_csv(f)
 
 	# Test model
-	mod = smf.ols(formula='observed_Total_Per100k ~ dioxinTotal + \
+	mod = smf.ols(formula='observed_Pancreas_Per100k ~ n_5_1_fugitive_air_dioxin + \
 	pctSmoking + pctElderly + income + higherEd + unemploy', data = data_merged).fit(cov_type='HC0')
 	print mod.summary()
 	# Correlation Table Heat Map
