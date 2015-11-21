@@ -19,8 +19,7 @@ def hm(corr):
 
 	# Draw the heatmap with the mask and correct aspect ratio
 	sns.heatmap(corr, mask=mask, cmap=cmap, vmax=.3,
-	            # square=True, xticklabels=False, yticklabels=False,
-	            square=True, 
+	            square=True, xticklabels=False, yticklabels=False,
 	            linewidths=.5, cbar_kws={"shrink": .5}, ax=ax)
 
 	plt.yticks(rotation=0) 

@@ -116,7 +116,7 @@ def main_CensusTract():
 	pctSmoking + pctElderly + income + higherEd + unemploy', data = data_merged).fit(cov_type='HC0')
 	print mod.summary()
 	# Correlation Table Heat Map
-	#hm(correlation_table)
+	hm(correlation_table)
 
 main_CensusTract()
 
