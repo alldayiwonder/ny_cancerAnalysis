@@ -112,7 +112,7 @@ def main_CensusTract():
 				result_df.to_csv(f)
 
 	# Test model
-	mod = smf.ols(formula='observed_Pancreas_Per100k ~ n_5_1_fugitive_air_dioxin + \
+	mod = smf.ols(formula='observed_Kidney_Per100k ~ n_5_1_fugitive_air_dioxin + \
 	pctSmoking + pctElderly + income + higherEd + unemploy', data = data_merged).fit(cov_type='HC0')
 	print mod.summary()
 	# Correlation Table Heat Map

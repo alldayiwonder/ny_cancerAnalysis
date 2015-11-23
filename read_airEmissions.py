@@ -77,32 +77,44 @@ def read_airEmissions_CensusTract():
 	# 22 records are missing any data for benzene
 	airEmissions_benzene = airEmissions_allchemicals[airEmissions_allchemicals['chemical'] == 'BENZENE']
 	airEmissions_benzene = airEmissions_benzene.rename(columns={'n_5_1_fugitive_air': 'n_5_1_fugitive_air_benzene', 'n_5_2_stack_air': 'n_5_2_stack_air_benzene'})
-	print 'Census tracts with facilities reporting benzene emissions:', len(airEmissions_benzene)
-	
+	count_fugitive_benzene = (airEmissions_benzene['n_5_1_fugitive_air_benzene'] > 0).sum()
+	count_stack_benzene = (airEmissions_benzene['n_5_2_stack_air_benzene'] > 0).sum()
+	print 'Census tracts with facilities reporting benzene emissions (fugitive, stack):', count_fugitive_benzene,',',count_stack_benzene
+		
 	# Toluene emissions per census tract
 	airEmissions_toluene = airEmissions_allchemicals[airEmissions_allchemicals['chemical'] == 'TOLUENE']
 	airEmissions_toluene = airEmissions_toluene.rename(columns={'n_5_1_fugitive_air': 'n_5_1_fugitive_air_toluene', 'n_5_2_stack_air': 'n_5_2_stack_air_toluene'})
-	print 'Census tracts with facilities reporting toluene emissions:', len(airEmissions_toluene)
+	count_fugitive_toluene = (airEmissions_toluene['n_5_1_fugitive_air_toluene'] > 0).sum()
+	count_stack_toluene = (airEmissions_toluene['n_5_2_stack_air_toluene'] > 0).sum()
+	print 'Census tracts with facilities reporting toluene emissions (fugitive, stack):', count_fugitive_toluene,',',count_stack_toluene
 
 	# Ethylbenzene emissions per census tract
 	airEmissions_ethylbenzene = airEmissions_allchemicals[airEmissions_allchemicals['chemical'] == 'ETHYLBENZENE']
 	airEmissions_ethylbenzene = airEmissions_ethylbenzene.rename(columns={'n_5_1_fugitive_air': 'n_5_1_fugitive_air_ethylbenzene', 'n_5_2_stack_air': 'n_5_2_stack_air_ethylbenzene'})
-	print 'Census tracts with facilities reporting ethylbenzene emissions:', len(airEmissions_ethylbenzene)
+	count_fugitive_ethylbenzene = (airEmissions_ethylbenzene['n_5_1_fugitive_air_ethylbenzene'] > 0).sum()
+	count_stack_ethylbenzene = (airEmissions_ethylbenzene['n_5_2_stack_air_ethylbenzene'] > 0).sum()
+	print 'Census tracts with facilities reporting ethylbenzene emissions (fugitive, stack):', count_fugitive_ethylbenzene,',',count_stack_ethylbenzene
 
 	# Xylene emissions per census tract
 	airEmissions_xylene = airEmissions_allchemicals[airEmissions_allchemicals['chemical'] == 'XYLENE (MIXED ISOMERS)']
 	airEmissions_xylene = airEmissions_xylene.rename(columns={'n_5_1_fugitive_air': 'n_5_1_fugitive_air_xylene', 'n_5_2_stack_air': 'n_5_2_stack_air_xylene'})
-	print 'Census tracts with facilities reporting xylene emissions:', len(airEmissions_xylene)
+	count_fugitive_xylene = (airEmissions_xylene['n_5_1_fugitive_air_xylene'] > 0).sum()
+	count_stack_xylene = (airEmissions_xylene['n_5_2_stack_air_xylene'] > 0).sum()
+	print 'Census tracts with facilities reporting xylene emissions (fugitive, stack):', count_fugitive_xylene,',',count_stack_xylene
 
 	# Formaldehyde emissions per census tract
 	airEmissions_formaldehyde = airEmissions_allchemicals[airEmissions_allchemicals['chemical'] == 'FORMALDEHYDE']
 	airEmissions_formaldehyde = airEmissions_formaldehyde.rename(columns={'n_5_1_fugitive_air': 'n_5_1_fugitive_air_formaldehyde', 'n_5_2_stack_air': 'n_5_2_stack_air_formaldehyde'})
-	print 'Census tracts with facilities reporting formaldehyde emissions:', len(airEmissions_formaldehyde)
+	count_fugitive_formaldehyde = (airEmissions_formaldehyde['n_5_1_fugitive_air_formaldehyde'] > 0).sum()
+	count_stack_formaldehyde = (airEmissions_formaldehyde['n_5_2_stack_air_formaldehyde'] > 0).sum()
+	print 'Census tracts with facilities reporting formaldehyde emissions (fugitive, stack):', count_fugitive_formaldehyde,',',count_stack_formaldehyde
 
 	# Dioxin emissions per census tract
 	airEmissions_dioxin = airEmissions_allchemicals[airEmissions_allchemicals['chemical'] == 'DIOXIN AND DIOXIN-LIKE COMPOUNDS']
 	airEmissions_dioxin = airEmissions_dioxin.rename(columns={'n_5_1_fugitive_air': 'n_5_1_fugitive_air_dioxin', 'n_5_2_stack_air': 'n_5_2_stack_air_dioxin'})
-	print 'Census tracts with facilities reporting dioxin emissions:', len(airEmissions_dioxin)
+	count_fugitive_dioxin = (airEmissions_dioxin['n_5_1_fugitive_air_dioxin'] > 0).sum()
+	count_stack_dioxin = (airEmissions_dioxin['n_5_2_stack_air_dioxin'] > 0).sum()
+	print 'Census tracts with facilities reporting dioxin emissions (fugitive, stack):', count_fugitive_dioxin,',',count_stack_dioxin
 	
 
 	# Merge the aggregation of each specific chemical with the total emissions for the main file
@@ -140,7 +152,7 @@ def read_airEmissions_CensusTract():
 	return data_merged_dioxin 
 
 #read_airEmissions_County()
-#read_airEmissions_CensusTract()
+read_airEmissions_CensusTract()
 
 
 

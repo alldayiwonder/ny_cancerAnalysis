@@ -11,6 +11,7 @@ def read_cancerRisk_CensusTract():
 
 	cancerRisk["GEOID"] = cancerRisk["FIPS"].astype(str) + cancerRisk["TRACT"]
 
+	cancerRisk.to_csv('/Users/Steve/Github/ny_cancerAnalysis/data/EPA_NATA/US_NATA05_NYgeoid.csv')
 	return cancerRisk 
 
-#read_cancerRisk_CensusTract()
+read_cancerRisk_CensusTract()
