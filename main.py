@@ -119,6 +119,7 @@ def main_CensusTract():
 	print mod.summary()
 	# Correlation Table Heat Map
 	hm(correlation_table)
+	return data_merged
 
 main_CensusTract()
 
