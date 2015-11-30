@@ -46,10 +46,12 @@ def main_County():
 def main_CensusTract():
 	# Import air data
 	airEmissions = read_airEmissions_CensusTract()
+	#print airEmissions['n_5_1_fugitive_air_dioxin'].describe()
 
 	# Import cancer data
 	# allCancer = readIndivCancer_CensusTract()  
 	allCancer = mergeCancer_Tract()
+	#allCancer.to_csv('/Users/Steve/Github/ny_cancerAnalysis/data/NYSDOH_CancerMapping_Data_2005_2009/allCancer.csv')
 
 	# Import smoking data
 	smoking = readSmoking()   
@@ -112,7 +114,7 @@ def main_CensusTract():
 				result_df.to_csv(f)
 
 	# Test model
-	mod = smf.ols(formula='observed_Kidney_Per100k ~ n_5_1_fugitive_air_dioxin + \
+	mod = smf.ols(formula='observed_Esophagus_Per100k ~ n_5_1_fugitive_air_dioxin + \
 	pctSmoking + pctElderly + income + higherEd + unemploy', data = data_merged).fit(cov_type='HC0')
 	print mod.summary()
 	# Correlation Table Heat Map

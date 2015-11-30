@@ -59,7 +59,9 @@ def read_airEmissions_CensusTract():
 	print 'Facilties reporting benzene', len(airEmissions_chemicalCount.get_group('BENZENE'))
 	print 'Facilties reporting toluene', len(airEmissions_chemicalCount.get_group('TOLUENE'))
 	print 'Facilties reporting ethylbenzene', len(airEmissions_chemicalCount.get_group('ETHYLBENZENE'))
+	print 'Facilties reporting xylene', len(airEmissions_chemicalCount.get_group('XYLENE (MIXED ISOMERS)'))
 	print 'Facilties reporting formaldehyde', len(airEmissions_chemicalCount.get_group('FORMALDEHYDE'))
+	print 'Facilties reporting dioxins', len(airEmissions_chemicalCount.get_group('DIOXIN AND DIOXIN-LIKE COMPOUNDS'))
 	# Total emissions per census tract, total of 498 tracts with reporting facilities
 	# This aggregation does not take into account the toxicity of individual chemicals
 	airEmissions_total = airEmissions_trim.groupby(['geoid'], as_index=False).aggregate(np.sum)
@@ -80,7 +82,7 @@ def read_airEmissions_CensusTract():
 	count_fugitive_benzene = (airEmissions_benzene['n_5_1_fugitive_air_benzene'] > 0).sum()
 	count_stack_benzene = (airEmissions_benzene['n_5_2_stack_air_benzene'] > 0).sum()
 	print 'Census tracts with facilities reporting benzene emissions (fugitive, stack):', count_fugitive_benzene,',',count_stack_benzene
-		
+
 	# Toluene emissions per census tract
 	airEmissions_toluene = airEmissions_allchemicals[airEmissions_allchemicals['chemical'] == 'TOLUENE']
 	airEmissions_toluene = airEmissions_toluene.rename(columns={'n_5_1_fugitive_air': 'n_5_1_fugitive_air_toluene', 'n_5_2_stack_air': 'n_5_2_stack_air_toluene'})
@@ -148,6 +150,7 @@ def read_airEmissions_CensusTract():
 	data_merged_dioxin = pd.merge(data_merged_formaldehyde, airEmissions_dioxin, how='outer')
 	data_merged_dioxin = data_merged_dioxin.drop('chemical', 1)
 	data_merged_dioxin['dioxinTotal'] = data_merged_dioxin['n_5_1_fugitive_air_dioxin'] + data_merged_dioxin['n_5_2_stack_air_dioxin'] 
+
 
 	return data_merged_dioxin 
 
