@@ -1,5 +1,5 @@
 # Analysis of Cancer Incidence Rates in New York State
-Cancer is one of the most common chronic diseases in New York State, and is second only to heart disease as the leading cause of death. Each year, about 100,000 New Yorkers are diagnosed with cancer. This project aims to study the relationship between cancer incidence rates and various features, with a focus on industrial air pollution in New York State. This project uses Python and the libraries and data sources listed below.
+Cancer is one of the most common chronic diseases in New York State, and is second only to heart disease as the leading cause of death. Each year, about 100,000 New Yorkers are diagnosed with cancer. This project aims to study the relationship between cancer incidence rates and various features, with a focus on industrial air pollution in New York State.  
 
 ## Smoking
 Smoking is a risk factor for cancers of the lung, mouth, larynx, bladder, kidney, and several other organs. But having a risk factor, or even several, does not mean that you will get the disease. We use data that estimates the number of smokers in each area to control for smoking. The table below indicates whether smoking is the highest risk factor for each cancer type.
